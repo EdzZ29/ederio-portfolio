@@ -59,14 +59,40 @@
     </div>
 
     <!-- Top Bar -->
-    <header class="text-[#d5d5d5] py-6 px-6 hidden md:flex justify-center gap-10 font-medium text-sm md:text-base z-20 relative mix-blend-difference w-full absolute top-0">
-        <a href="#home" class="hover:text-white transition-colors">Home</a>
-        <a href="#about" class="hover:text-white transition-colors">About</a>
-        <a href="#resume" class="hover:text-white transition-colors">Education & Experience</a>
-        <a href="#services" class="hover:text-white transition-colors">Services</a>
-        <a href="#tools" class="hover:text-white transition-colors">Tools I Use</a>
-        <a href="#contact" class="hover:text-white transition-colors">Contact me</a>
+    <header class="text-[#d5d5d5] py-6 px-6 md:px-12 flex justify-between md:justify-center items-center font-medium text-sm md:text-base z-50 absolute top-0 w-full mix-blend-difference">
+        <!-- Logo Text (Mobile Only) -->
+        <div class="md:hidden text-white font-bold text-xl tracking-wider">PORTFOLIO</div>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex gap-10">
+            <a href="#home" class="hover:text-white transition-colors">Home</a>
+            <a href="#about" class="hover:text-white transition-colors">About</a>
+            <a href="#resume" class="hover:text-white transition-colors">Education & Experience</a>
+            <a href="#services" class="hover:text-white transition-colors">Services</a>
+            <a href="#tools" class="hover:text-white transition-colors">Tools I Use</a>
+            <a href="#contact" class="hover:text-white transition-colors">Contact me</a>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-[#d5d5d5] hover:text-white focus:outline-none z-50 relative mix-blend-difference">
+            <svg id="hamburger-icon" class="w-8 h-8 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <svg id="close-icon" class="w-8 h-8 hidden transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#0f0f0f]/95 backdrop-blur-md z-40 hidden flex-col items-center justify-center gap-8 text-xl font-medium opacity-0 transition-opacity duration-300">
+        <a href="#home" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Home</a>
+        <a href="#about" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">About</a>
+        <a href="#resume" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Education & Experience</a>
+        <a href="#services" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Services</a>
+        <a href="#tools" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Tools I Use</a>
+        <a href="#contact" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Contact me</a>
+    </div>
 
     <!-- Full Width Hero Section -->
     <section id="home" class="min-h-[90vh] flex items-center relative z-10 px-8 py-16 md:px-16 lg:px-24 w-full">
@@ -467,6 +493,44 @@
         <svg class="w-6 h-6 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
     </a>
 
+    <!-- Mobile Menu Script -->
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const links = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isHidden = menu.classList.contains('hidden');
+            
+            if (isHidden) {
+                // Open menu
+                menu.classList.remove('hidden');
+                // Small delay to allow display flex to apply before transitioning opacity
+                setTimeout(() => menu.classList.remove('opacity-0'), 10);
+                hamburgerIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            } else {
+                // Close menu
+                menu.classList.add('opacity-0');
+                hamburgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore scrolling
+                
+                // Wait for opacity transition before hiding completely
+                setTimeout(() => menu.classList.add('hidden'), 300);
+            }
+        }
+
+        btn.addEventListener('click', toggleMenu);
+
+        // Close menu when a link is clicked
+        links.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+    </script>
     <!-- Custom Script -->
     <script src="javascript/main.js"></script>
 </body>
