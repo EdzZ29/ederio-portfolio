@@ -60,8 +60,11 @@
 
     <!-- Top Bar -->
     <header class="text-[#d5d5d5] py-6 px-6 md:px-12 flex justify-between md:justify-center items-center font-medium text-sm md:text-base z-50 absolute top-0 w-full mix-blend-difference">
-        <!-- Logo Text (Mobile Only) -->
-        <div class="md:hidden text-white font-bold text-xl tracking-wider">PORTFOLIO</div>
+        <!-- Logo Text (Mobile Only, Centered) -->
+        <div class="md:hidden text-white font-bold text-xl tracking-wider absolute left-1/2 -translate-x-1/2">PORTFOLIO</div>
+        
+        <!-- Empty div to push hamburger to right on mobile -->
+        <div class="md:hidden"></div>
 
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex gap-10">
@@ -125,8 +128,8 @@
             </div>
 
             <!-- Big Typography (Right) -->
-            <div class="flex-1 flex justify-center lg:justify-end w-full observe-animate delay-200">
-                <div class="mr-24 text-[5rem] sm:text-[7rem] md:text-[8rem] lg:text-[10rem] xl:text-[11rem] font-bold text-white leading-[0.8] tracking-tight drop-shadow-2xl">
+            <div class="flex-1 flex justify-center lg:justify-end w-full observe-animate delay-200 mt-10 lg:mt-0">
+                <div class="lg:mr-24 text-center lg:text-left text-[5rem] sm:text-[7rem] md:text-[8rem] lg:text-[10rem] xl:text-[11rem] font-bold text-white leading-[0.8] tracking-tight drop-shadow-2xl">
                     <div class="mb-4">PORT</div>
                     <div>FOLIO</div>
                 </div>
@@ -153,7 +156,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                 </p>
 
-                <div class="mb-12">
+                <div class="mb-12 flex flex-col items-center lg:items-start">
                     <a href="#contact" class="inline-block text-lg md:text-xl text-white hover:text-gray-300 transition-colors tracking-widest font-medium uppercase mb-4">
                         GET IN TOUCH
                     </a>
@@ -167,7 +170,7 @@
                     </div>
                 </div>
 
-                <div class="border border-white/30 rounded-2xl flex flex-col md:flex-row items-center justify-between px-8 py-5 max-w-[28rem]">
+                <div class="border border-white/30 rounded-2xl flex flex-col md:flex-row items-center justify-between px-8 py-5 max-w-[28rem] mx-auto lg:mx-0">
                     <div class="flex flex-col text-left mb-4 md:mb-0 w-full md:w-auto">
                         <h3 class="text-white font-bold text-xl tracking-wide leading-tight">Social Media</h3>
                         <span class="text-gray-400 text-[11px] uppercase tracking-wider">Accounts</span>
@@ -507,6 +510,7 @@
             if (isHidden) {
                 // Open menu
                 menu.classList.remove('hidden');
+                menu.classList.add('flex');
                 // Small delay to allow display flex to apply before transitioning opacity
                 setTimeout(() => menu.classList.remove('opacity-0'), 10);
                 hamburgerIcon.classList.add('hidden');
@@ -520,7 +524,10 @@
                 document.body.style.overflow = ''; // Restore scrolling
                 
                 // Wait for opacity transition before hiding completely
-                setTimeout(() => menu.classList.add('hidden'), 300);
+                setTimeout(() => {
+                    menu.classList.add('hidden');
+                    menu.classList.remove('flex');
+                }, 300);
             }
         }
 
