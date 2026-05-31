@@ -430,53 +430,86 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-24">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-12 text-center observe-animate uppercase tracking-wide">SERVICES</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section id="services" class="py-24 w-full relative z-10 px-8 md:px-16 lg:px-24">
+        <div class="w-full max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
+            
+            <!-- Left Text Content -->
+            <div class="flex-1 observe-animate text-left w-full lg:max-w-md">
+                <h2 class="text-3xl font-bold text-white mb-12 tracking-wide uppercase">SERVICES</h2>
                 
-                <!-- Project 1 -->
-                <div class="group relative overflow-hidden rounded-2xl bg-slate-800 border border-slate-700/50 hover:border-primary/50 transition-colors duration-300 observe-animate delay-100">
-                    <div class="h-48 bg-slate-700 flex items-center justify-center object-cover overflow-hidden">
-                        <p class="text-slate-500 group-hover:scale-110 transition-transform duration-500">Project Image / Mockup</p>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2">E-Commerce Platform</h3>
-                        <p class="text-slate-400 text-sm mb-4">A complete frontend redesign using React and Tailwind CSS focusing on conversion rates.</p>
-                        <a href="#" class="text-primary text-sm font-semibold hover:text-indigo-400 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                            View Project <span>&rarr;</span>
-                        </a>
-                    </div>
+                <div class="mb-10">
+                    <h3 class="text-lg font-bold text-white mb-2">Graphic Design</h3>
+                    <p class="text-[#d5d5d5] text-sm leading-relaxed font-normal">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                    </p>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="group relative overflow-hidden rounded-2xl bg-slate-800 border border-slate-700/50 hover:border-primary/50 transition-colors duration-300 observe-animate delay-200">
-                    <div class="h-48 bg-slate-700 flex items-center justify-center object-cover overflow-hidden">
-                        <p class="text-slate-500 group-hover:scale-110 transition-transform duration-500">Project Image / Mockup</p>
+                <div class="mb-10">
+                    <h3 class="text-lg font-bold text-white mb-2">UX / UI Design</h3>
+                    <p class="text-[#d5d5d5] text-sm leading-relaxed font-normal">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Carousel Content -->
+            <div class="flex-[1.5] w-full relative observe-animate delay-200">
+                <!-- Carousel Container -->
+                <div id="carousel-container" class="relative w-full aspect-[4/3] md:aspect-[16/10] bg-[#d9d9d9] overflow-hidden group">
+                    
+                    <!-- Slides -->
+                    <div id="service-slides" class="w-full h-full relative">
+                        <!-- Slide 1 -->
+                        <div class="absolute inset-0 transition-opacity duration-700 opacity-100 slide-item bg-gray-300 z-10">
+                            <!-- Use an image if you have one, otherwise fallback to text -->
+                            <div class="w-full h-full flex items-center justify-center text-gray-500 font-bold text-2xl">Image 1</div>
+                            <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-6 cursor-pointer">
+                                <h4 class="text-2xl font-bold text-white mb-2">Brand Identity Design</h4>
+                                <p class="text-gray-300 text-sm">Created branding guidelines, logos, and printed assets for various companies.</p>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="absolute inset-0 transition-opacity duration-700 opacity-0 slide-item bg-gray-400 z-0">
+                            <div class="w-full h-full flex items-center justify-center text-gray-600 font-bold text-2xl">Image 2</div>
+                            <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-6 cursor-pointer">
+                                <h4 class="text-2xl font-bold text-white mb-2">UX / UI Mobile App</h4>
+                                <p class="text-gray-300 text-sm">Designed high-fidelity mockups, wireframes, and interactive prototypes for iOS & Android.</p>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="absolute inset-0 transition-opacity duration-700 opacity-0 slide-item bg-gray-300 z-0">
+                            <div class="w-full h-full flex items-center justify-center text-gray-500 font-bold text-2xl">Image 3</div>
+                            <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-6 cursor-pointer">
+                                <h4 class="text-2xl font-bold text-white mb-2">Web Design Dashboard</h4>
+                                <p class="text-gray-300 text-sm">Seamless implementation of SaaS visual designs into functional frontend dashboards.</p>
+                            </div>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="absolute inset-0 transition-opacity duration-700 opacity-0 slide-item bg-gray-400 z-0">
+                            <div class="w-full h-full flex items-center justify-center text-gray-600 font-bold text-2xl">Image 4</div>
+                            <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-6 cursor-pointer">
+                                <h4 class="text-2xl font-bold text-white mb-2">Marketing Materials</h4>
+                                <p class="text-gray-300 text-sm">Developed complete marketing systems across digital banners and physical media.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2">SaaS Dashboard</h3>
-                        <p class="text-slate-400 text-sm mb-4">A high-performance analytics dashboard tailored for B2B users with dark mode support.</p>
-                        <a href="#" class="text-primary text-sm font-semibold hover:text-indigo-400 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                            View Project <span>&rarr;</span>
-                        </a>
-                    </div>
+
+                    <!-- Navigation Arrows -->
+                    <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="group relative overflow-hidden rounded-2xl bg-slate-800 border border-slate-700/50 hover:border-primary/50 transition-colors duration-300 observe-animate delay-300">
-                    <div class="h-48 bg-slate-700 flex items-center justify-center object-cover overflow-hidden">
-                        <p class="text-slate-500 group-hover:scale-110 transition-transform duration-500">Project Image / Mockup</p>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2">Creative Portfolio</h3>
-                        <p class="text-slate-400 text-sm mb-4">A minimalist portfolio for an acclaimed photographer with smooth WebGL transitions.</p>
-                        <a href="#" class="text-primary text-sm font-semibold hover:text-indigo-400 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                            View Project <span>&rarr;</span>
-                        </a>
-                    </div>
+                <!-- Dots Container -->
+                <div class="flex justify-center gap-4 mt-8">
+                    <button onclick="goToSlide(0)" class="slide-dot w-4 h-4 rounded-full bg-[#d5d5d5] transition-all duration-300 focus:outline-none"></button>
+                    <button onclick="goToSlide(1)" class="slide-dot w-4 h-4 rounded-full bg-[#3a3a3a] transition-all duration-300 focus:outline-none"></button>
+                    <button onclick="goToSlide(2)" class="slide-dot w-4 h-4 rounded-full bg-[#3a3a3a] transition-all duration-300 focus:outline-none"></button>
+                    <button onclick="goToSlide(3)" class="slide-dot w-4 h-4 rounded-full bg-[#3a3a3a] transition-all duration-300 focus:outline-none"></button>
                 </div>
-
             </div>
         </div>
     </section>
