@@ -152,9 +152,17 @@
                     EDMUNDO EDERIO
                 </h1>
                 <p
-                    class="text-[#d5d5d5] text-sm md:text-base max-w-md mx-auto lg:mx-0 leading-relaxed font-normal mb-12">
-                    Graphic Desinger | Programmer / Developer | UX/UI
+                    class="text-[#d5d5d5] text-sm md:text-base max-w-md mx-auto lg:mx-0 leading-relaxed font-normal mb-6">
+                    Graphic Designer | Programmer / Developer | UX/UI
                 </p>
+
+                <div class="flex items-center justify-center lg:justify-start gap-3 mb-10 w-fit mx-auto lg:mx-0 bg-green-500/10 px-4 py-2 rounded-full border border-green-500/20 backdrop-blur-sm shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+                    <span class="relative flex h-2.5 w-2.5">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500 box-shadow-[0_0_8px_#22c55e]"></span>
+                    </span>
+                    <span class="text-green-400 font-bold text-xs tracking-widest uppercase">AVAILABLE</span>
+                </div>
 
                 <!-- Contact Info -->
                 <div class="flex flex-col gap-4 text-sm md:text-base text-[#d5d5d5] mx-auto lg:mx-0 items-center lg:items-start"
@@ -304,12 +312,41 @@
             </div>
 
             <!-- Right Image Container -->
-            <div class="flex-1 w-full flex justify-center lg:justify-end observe-animate delay-200">
-                <div
-                    class="w-full max-w-[500px] aspect-[4/4.5] bg-gradient-to-b from-[#3a3a3a] to-[#1a1a1a] rounded-[2rem] overflow-hidden flex items-end justify-center relative shadow-2xl">
-                    <!-- Photo placeholder - Replace src with your actual photo path -->
-                    <img src="./img/formal-attire.png" alt="My Portrait" class="w-full h-full object-cover object-bottom"
-                        onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' fill=\'#2a2a2a\'><rect width=\'100%\' height=\'100%\'/><text x=\'50%\' y=\'50%\' fill=\'#777\' font-family=\'sans-serif\' font-size=\'20\' text-anchor=\'middle\' dy=\'.3em\'>Place your photo here</text></svg>'">
+            <!-- Right Image Container (with Flip Effect) -->
+            <div class="flex-1 w-full flex justify-center lg:justify-end observe-animate delay-200 group [perspective:1000px]">
+                <div class="w-full max-w-[500px] aspect-[4/4.5] relative transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] rounded-[2rem] shadow-2xl cursor-pointer">
+                    
+                    <!-- Front Side (Image) -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-[#3a3a3a] to-[#1a1a1a] rounded-[2rem] overflow-hidden flex items-end justify-center [backface-visibility:hidden]">
+                        <!-- Photo placeholder - Replace src with your actual photo path -->
+                        <img src="./img/formal-attire.png" alt="My Portrait" class="w-full h-full object-cover object-bottom"
+                            onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' fill=\'#2a2a2a\'><rect width=\'100%\' height=\'100%\'/><text x=\'50%\' y=\'50%\' fill=\'#777\' font-family=\'sans-serif\' font-size=\'20\' text-anchor=\'middle\' dy=\'.3em\'>Place your photo here</text></svg>'">
+                    </div>
+
+                    <!-- Back Side (Personal Info) -->
+                    <div class="absolute inset-0 bg-[#1a1a1a] border-2 border-[#333] rounded-[2rem] overflow-hidden flex flex-col justify-center p-8 md:p-12 [backface-visibility:hidden] [transform:rotateY(180deg)] text-[#d5d5d5]">
+                        <h3 class="text-2xl font-bold text-white mb-6 tracking-wide border-b border-[#333] pb-4">Personal Info</h3>
+                        
+                        <div class="flex flex-col gap-5 text-sm md:text-base">
+                            <div>
+                                <span class="text-[#6366f1] font-bold block text-xs tracking-wider uppercase mb-1">Nationality</span>
+                                <span class="font-medium text-white flex items-center gap-2">Filipino</span>
+                            </div>
+                            <div>
+                                <span class="text-[#6366f1] font-bold block text-xs tracking-wider uppercase mb-1">Language</span>
+                                <span class="font-medium text-white">Tagalog, English</span>
+                            </div>
+                            <div>
+                                <span class="text-[#6366f1] font-bold block text-xs tracking-wider uppercase mb-1">Email</span>
+                                <a href="mailto:jrederio01@gmail.com" class="font-medium text-white hover:text-[#6366f1] transition-colors">jrederio01@gmail.com</a>
+                            </div>
+                            <div>
+                                <span class="text-[#6366f1] font-bold block text-xs tracking-wider uppercase mb-1">Location</span>
+                                <span class="font-medium text-white leading-relaxed block">P-1A Ampayon Butuan City Mindanao, Philippines</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
