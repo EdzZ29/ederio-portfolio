@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Ederio &mdash; Designer &amp; Developer</title>
     <!-- Tailwind CSS Script -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom Tailwind Config -->
@@ -13,11 +13,14 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#6366f1', // Indigo 500
-                        secondary: '#0f0f0f', // Very dark gray/black
+                        paper: '#f4f4f2',   // off-white page background
+                        ink: '#111111',     // near-black type
+                        muted: '#77776f',   // secondary type
+                        line: '#dededa',    // hairline rules
+                        chalk: '#e9e9e5',   // subtle fills
                     },
                     fontFamily: {
-                        sans: ['"Hepta Slab"', 'serif'],
+                        sans: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
                     }
                 }
             }
@@ -26,12 +29,40 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="shortcut icon" href="./img/ederio-logo.png" type="image/x-icon">
-    <!-- Inline styles for the scroll animations -->
     <style>
         body {
-            font-family: '"Hepta Slab"', serif;
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            letter-spacing: -0.011em;
+        }
+
+        /* Oversized display type - thin and tightly tracked, as in the reference */
+        .display {
+            font-weight: 200;
+            letter-spacing: -0.05em;
+            line-height: 0.82;
+        }
+
+        /* Small all-caps labels */
+        .label {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        /* Vertical side-rail text */
+        .vertical {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
+        /* The logotype PNG is white-on-transparent - flip it for the light page */
+        .logo-ink {
+            filter: invert(1);
         }
 
         /* Initial state for elements before they scroll into view */
@@ -48,976 +79,884 @@
         }
 
         /* Delay utilities for staggered animations */
-        .delay-100 {
-            transition-delay: 100ms;
-        }
-
-        .delay-200 {
-            transition-delay: 200ms;
-        }
-
-        .delay-300 {
-            transition-delay: 300ms;
-        }
-
-        .delay-400 {
-            transition-delay: 400ms;
-        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
 
         /* Typing Cursor Blink Animation */
         @keyframes blink {
-            50% {
-                border-color: transparent;
-            }
+            50% { border-color: transparent; }
         }
 
         .typing-cursor {
-            border-right: 4px solid white;
-            padding-right: 4px;
+            border-right: 3px solid #111111;
+            padding-right: 6px;
             animation: blink 1s step-end infinite;
+        }
+
+        /* Portrait treatment: monochrome, matching the reference */
+        .portrait {
+            filter: grayscale(1) contrast(1.06);
+        }
+
+        /* Underlined link with an offset rule, as in the reference nav */
+        .rule-link {
+            text-decoration: underline;
+            text-underline-offset: 5px;
+            text-decoration-thickness: 1px;
         }
     </style>
 </head>
 
-<body class="bg-[#0f0f0f] text-slate-300 overflow-x-hidden font-sans">
-
-    <!-- Full Width Background & Overlay -->
-    <div class="fixed inset-0 z-0">
-        <img src="bg.png" alt="Background pattern" class="w-full h-full object-cover opacity-70" />
-        <div class="absolute inset-0 bg-[#0f0f0f]/90"></div>
-    </div>
+<body class="bg-paper text-ink overflow-x-hidden font-sans antialiased">
 
     <!-- Top Bar -->
     <header
-        class="text-[#d5d5d5] py-6 px-6 md:px-12 flex justify-between md:justify-center items-center font-medium text-sm md:text-base z-50 absolute top-0 w-full mix-blend-difference">
-        <!-- Logo Text (Mobile Only, Centered) -->
-        <div class="md:hidden text-white font-bold text-xl tracking-wider absolute left-1/2 -translate-x-1/2">PORTFOLIO
-        </div>
+        class="fixed top-0 w-full z-50 px-6 md:px-10 lg:px-14 py-6 flex items-center justify-between bg-paper/80 backdrop-blur-md">
 
-        <!-- Empty div to push hamburger to right on mobile -->
-        <div class="md:hidden"></div>
+        <!-- Logotype -->
+        <a href="#home" class="flex items-center shrink-0">
+            <img src="./img/ederio-logo.png" alt="Ederio" class="logo-ink h-5 md:h-6 w-auto" />
+        </a>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden md:flex gap-10">
-            <a href="#home" class="hover:text-white transition-colors">Home</a>
-            <a href="#about" class="hover:text-white transition-colors">About</a>
-            <a href="#resume" class="hover:text-white transition-colors">Education & Experience</a>
-            <a href="#services" class="hover:text-white transition-colors">Services</a>
-            <a href="#works" class="hover:text-white transition-colors">Sample Works</a>
-            <a href="#tools" class="hover:text-white transition-colors">Tools I Use</a>
-            <a href="#contact" class="hover:text-white transition-colors">Contact me</a>
+        <nav class="hidden lg:flex items-center gap-9 text-sm text-muted absolute left-1/2 -translate-x-1/2">
+            <a href="#about" class="hover:text-ink transition-colors">About Me</a>
+            <a href="#resume" class="hover:text-ink transition-colors">Experience</a>
+            <a href="#services" class="hover:text-ink transition-colors">Services</a>
+            <a href="#works" class="hover:text-ink transition-colors">Portfolio</a>
+            <a href="#tools" class="hover:text-ink transition-colors">Tools</a>
         </nav>
 
+        <!-- Contact CTA -->
+        <a href="#contact"
+            class="hidden lg:inline-flex items-center gap-1.5 text-sm text-ink rule-link hover:text-muted transition-colors">
+            Book A Call
+            <span aria-hidden="true">&#8599;</span>
+        </a>
+
         <!-- Mobile Hamburger Button -->
-        <button id="mobile-menu-btn"
-            class="md:hidden text-[#d5d5d5] hover:text-white focus:outline-none z-50 relative mix-blend-difference">
-            <svg id="hamburger-icon" class="w-8 h-8 transition-transform duration-300" fill="none" stroke="currentColor"
+        <button id="mobile-menu-btn" class="lg:hidden text-ink focus:outline-none z-50 relative" aria-label="Open menu">
+            <svg id="hamburger-icon" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5"
                 viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-                </path>
+                <path stroke-linecap="round" d="M4 8h16M4 16h16"></path>
             </svg>
-            <svg id="close-icon" class="w-8 h-8 hidden transition-transform duration-300" fill="none"
-                stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            <svg id="close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" stroke-width="1.5"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
     </header>
 
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu"
-        class="fixed inset-0 bg-[#0f0f0f]/95 backdrop-blur-md z-40 hidden flex-col items-center justify-center gap-8 text-xl font-medium opacity-0 transition-opacity duration-300">
-        <a href="#home" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Home</a>
-        <a href="#about" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">About</a>
-        <a href="#resume" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Education &
-            Experience</a>
-        <a href="#services" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Services</a>
-        <a href="#works" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Sample Works</a>
-        <a href="#tools" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Tools I Use</a>
-        <a href="#contact" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Contact me</a>
+        class="fixed inset-0 bg-paper z-40 hidden flex-col items-center justify-center gap-7 text-2xl font-light opacity-0 transition-opacity duration-300">
+        <a href="#home" class="mobile-link hover:text-muted transition-colors">Home</a>
+        <a href="#about" class="mobile-link hover:text-muted transition-colors">About Me</a>
+        <a href="#resume" class="mobile-link hover:text-muted transition-colors">Experience</a>
+        <a href="#services" class="mobile-link hover:text-muted transition-colors">Services</a>
+        <a href="#works" class="mobile-link hover:text-muted transition-colors">Portfolio</a>
+        <a href="#tools" class="mobile-link hover:text-muted transition-colors">Tools</a>
+        <a href="#contact" class="mobile-link mt-4 text-base rule-link">Book A Call &#8599;</a>
     </div>
 
-    <!-- Full Width Hero Section -->
+    <!-- ===================== HERO ===================== -->
     <section id="home"
-        class="min-h-[90vh] flex items-center relative z-10 px-8 py-16 md:px-16 lg:px-24 w-full overflow-hidden">
+        class="relative min-h-screen w-full overflow-hidden flex items-center pt-28 pb-20 lg:pt-24 lg:pb-16">
 
-        <!-- Kinetic Animation Canvas -->
-        <canvas id="kinetic-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-70"></canvas>
 
-        <div
-            class="w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-8 relative z-10">
-
-            <!-- Text Content (Left) -->
-            <div class="flex-1 text-center lg:text-left observe-animate w-full">
-                <h1 class="text-3xl md:text-4xl font-bold text-white tracking-wide drop-shadow-lg mb-2">
-                    EDMUNDO EDERIO
-                </h1>
-                <p
-                    class="text-[#d5d5d5] text-sm md:text-base max-w-md mx-auto lg:mx-0 leading-relaxed font-normal mb-6">
-                    Graphic Designer | Programmer / Developer | UX/UI
-                </p>
-
-                <div class="flex items-center justify-center lg:justify-start gap-3 mb-10 w-fit mx-auto lg:mx-0 bg-green-500/10 px-4 py-2 rounded-full border border-green-500/20 backdrop-blur-sm shadow-[0_0_15px_rgba(34,197,94,0.1)]">
-                    <span class="relative flex h-2.5 w-2.5">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500 box-shadow-[0_0_8px_#22c55e]"></span>
-                    </span>
-                    <span class="text-green-400 font-bold text-xs tracking-widest uppercase">AVAILABLE</span>
-                </div>
-
-                <!-- Contact Info -->
-                <div class="flex flex-col gap-4 text-sm md:text-base text-[#d5d5d5] mx-auto lg:mx-0 items-center lg:items-start"
-                    style="width: fit-content;">
-                    <div class="flex items-center gap-4">
-                        <svg class="w-5 h-5 text-white shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-                        </svg>
-                        <span class="tracking-wide">09458573462</span>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <svg class="w-5 h-5 text-white shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                        </svg>
-                        <span class="tracking-wide">jrederio01@gmail.com</span>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <svg class="w-5 h-5 text-white shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                        </svg>
-                        <span class="tracking-wide">Purok -1A Ampayon Butuan City</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Big Typography (Right) -->
-            <div class="flex-1 flex justify-center lg:justify-end w-full observe-animate delay-200 mt-10 lg:mt-0">
-                <div
-                    class="lg:mr-24 text-center lg:text-left text-[5rem] sm:text-[7rem] md:text-[8rem] lg:text-[10rem] xl:text-[11rem] font-bold text-white leading-[0.8] tracking-tight drop-shadow-2xl">
-                    <div class="mb-4">PORT</div>
-                    <div>FOLIO</div>
-                </div>
-            </div>
-
+        <!-- Left Rail: role label, hairline, year -->
+        <div class="hidden lg:flex flex-col items-center absolute left-12 top-32 bottom-14 z-20 text-muted">
+            <span class="vertical label whitespace-nowrap">Designer &amp; Developer</span>
+            <div class="w-px flex-1 bg-line my-6"></div>
+            <span class="vertical label">2026</span>
         </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-24 w-full relative z-10 px-8 md:px-16 lg:px-24">
-        <div class="w-full max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+        <div class="w-full max-w-[1600px] mx-auto px-6 md:px-10 lg:pl-32 lg:pr-14 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-6 items-end">
 
-            <!-- Left Text Content -->
-            <div class="flex-1 observe-animate text-center lg:text-left w-full">
-                <!-- Wrapper for typing animation -->
-                <h2
-                    class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-wide drop-shadow-lg min-h-[3rem] md:min-h-[4rem]">
-                    <span id="typing-hello" class="typing-cursor" data-text="HELLO!"></span>
-                </h2>
+                <!-- Text Column -->
+                <div class="order-2 lg:order-1 observe-animate">
 
-                <p class="text-[#d5d5d5] text-sm leading-relaxed font-normal mb-4">
-                    I'm Edmundo C. Ederio Jr. a Graphic Designer, Full-Stack Developer, and UI/UX Designer who takes
-                    pride in building things that are both beautiful and functional.
-                </p>
-                <p class="text-[#d5d5d5] text-sm leading-relaxed font-normal mb-4">
-                    I design clean, high-quality visuals and develop secure, well-structured systems from pixel-perfect
-                    interfaces to reliable back-end logic. My work is always detailed, accurate, and built around the
-                    real needs of the people I serve.
-                </p>
-                <p class="text-[#d5d5d5] text-sm leading-relaxed font-normal mb-10">
-                    I am focused, organized, and collaborative someone you can count on to deliver quality work,
-                    maintain trust, and go beyond what is expected.
-                </p>
+                    <!-- Stats Row -->
+                    <div class="flex items-stretch gap-8 md:gap-12 mb-10 md:mb-14">
+                        <div>
+                            <div class="flex items-start">
+                                <span class="text-xl md:text-2xl font-light leading-none mt-1.5">+</span>
+                                <span class="text-4xl md:text-5xl font-light leading-none tracking-tight">6</span>
+                            </div>
+                            <p class="text-muted text-[13px] mt-2">Years experience</p>
+                        </div>
 
-                <div class="mb-12 flex flex-col items-center lg:items-start">
-                    <a href="#contact"
-                        class="inline-block text-lg md:text-xl text-white hover:text-gray-300 transition-colors tracking-widest font-medium uppercase mb-1">
-                        GET IN TOUCH
+                        <div class="w-px bg-line"></div>
+
+                        <div>
+                            <div class="flex items-start">
+                                <span class="text-xl md:text-2xl font-light leading-none mt-1.5">+</span>
+                                <span class="text-4xl md:text-5xl font-light leading-none tracking-tight">3</span>
+                            </div>
+                            <p class="text-muted text-[13px] mt-2">Core disciplines</p>
+                        </div>
+                    </div>
+
+                    <!-- Oversized Greeting -->
+                    <h1 class="display text-[5.5rem] sm:text-[8rem] md:text-[10rem] lg:text-[11rem] xl:text-[13rem]">
+                        Hello
+                    </h1>
+
+                    <p class="text-muted text-base md:text-lg mt-5 md:mt-6 font-light">
+                        &mdash; It&rsquo;s Ederio, a designer who codes
+                    </p>
+
+                    <!-- Scroll Cue -->
+                    <a href="#about"
+                        class="hidden lg:inline-flex items-center gap-2 text-muted text-sm mt-20 hover:text-ink transition-colors group">
+                        Scroll down
+                        <span class="transition-transform duration-300 group-hover:translate-y-1"
+                            aria-hidden="true">&#8595;</span>
                     </a>
-                    <p class="text-gray-400 text-[11px] mb-4 uppercase tracking-wider text-center lg:text-left">Click
-                        the icons below to message or connect</p>
-                    <div class="flex items-center gap-4 text-white">
-                        <a href="mailto:jrederio01@gmail.com" class="hover:text-red-500 transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                            </svg>
-                        </a>
-                        <a href="https://www.linkedin.com/in/edmundo-ederio-125208386/"
-                            class="hover:text-[#0A66C2] transition-colors font-bold text-xl font-sans tracking-tighter">
-                            in
-                        </a>
-                        <a href="https://github.com/EdzZ29" class="hover:text-gray-400 transition-colors"
-                            target="_blank" rel="noopener noreferrer">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                    </div>
-
-                    <div class="mt-8">
-                        <a href="Ederio - Resume.pdf" download
-                            class="inline-flex items-center gap-2 px-6 py-3 border border-white/50 rounded-full text-white hover:bg-white hover:text-[#0f0f0f] transition-all duration-300 text-sm tracking-widest font-medium uppercase shadow-lg hover:shadow-white/20">
-                            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                            </svg>
-                            Download Resume
-                        </a>
-                    </div>
                 </div>
 
-                <div
-                    class="border border-white/30 rounded-2xl flex flex-col md:flex-row items-center justify-between px-8 py-5 max-w-[28rem] mx-auto lg:mx-0">
-                    <div class="flex flex-col text-left mb-4 md:mb-0 w-full md:w-auto">
-                        <h3 class="text-white font-bold text-xl tracking-wide leading-tight">Social Media</h3>
-                        <span class="text-gray-400 text-[11px] uppercase tracking-wider">Accounts</span>
-                    </div>
-
-                    <div class="flex items-center gap-8 w-full md:w-auto justify-evenly md:justify-end">
-                        <a href="https://www.facebook.com/JrEderio"
-                            class="flex flex-col items-center group cursor-pointer">
-                            <svg class="w-6 h-6 text-white group-hover:text-[#1877F2] transition-colors"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.876h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10z" />
-                            </svg>
-                            <span class="text-[9px] text-gray-400 mt-2">Facebook</span>
-                        </a>
-
-                        <a href="https://www.tiktok.com/@jrederio"
-                            class="flex flex-col items-center group cursor-pointer">
-                            <svg class="w-6 h-6 text-white group-hover:text-[#ff0050] transition-colors drop-shadow-md group-hover:drop-shadow-[2px_2px_0px_#00f2fe]"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
-                            </svg>
-                            <span class="text-[9px] text-gray-400 mt-2">TikTok</span>
-                        </a>
-
-                        <a href="https://www.instagram.com/edzlds/"
-                            class="flex flex-col items-center group cursor-pointer">
-                            <svg class="w-6 h-6 text-white group-hover:text-[#E1306C] transition-colors"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
-                            </svg>
-                            <span class="text-[9px] text-gray-400 mt-2">Instagram</span>
-                        </a>
-                    </div>
+                <!-- Portrait Column -->
+                <div class="order-1 lg:order-2 observe-animate delay-200 w-full lg:mr-[-3.5rem] lg:mb-[-4rem]">
+                    <img src="./formal-2x2.png" alt="Portrait of Edmundo C. Ederio Jr."
+                        class="portrait w-full h-[38vh] sm:h-[46vh] lg:h-[84vh] object-cover object-top" />
                 </div>
+
             </div>
-
-            <!-- Right Image Container -->
-            <!-- Right Image Container (with Flip Effect) -->
-            <div class="flex-1 w-full flex justify-center lg:justify-end observe-animate delay-200 group [perspective:1000px]">
-                <div class="w-full max-w-[500px] aspect-[4/4.5] relative transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] rounded-[2rem] shadow-2xl cursor-pointer">
-                    
-                    <!-- Front Side (Image) -->
-                    <div class="absolute inset-0 bg-gradient-to-b from-[#3a3a3a] to-[#1a1a1a] rounded-[2rem] overflow-hidden flex items-end justify-center [backface-visibility:hidden]">
-                        <!-- Photo placeholder - Replace src with your actual photo path -->
-                        <img src="./formal-2x2.png" alt="My Portrait" class="w-full h-full object-cover object-bottom"
-                            onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' fill=\'#2a2a2a\'><rect width=\'100%\' height=\'100%\'/><text x=\'50%\' y=\'50%\' fill=\'#777\' font-family=\'sans-serif\' font-size=\'20\' text-anchor=\'middle\' dy=\'.3em\'>Place your photo here</text></svg>'">
-                    </div>
-
-                    <!-- Back Side (Personal Info) -->
-                    <div class="absolute inset-0 bg-[#1a1a1a] border-2 border-[#333] rounded-[2rem] overflow-hidden flex flex-col justify-center p-8 md:p-12 [backface-visibility:hidden] [transform:rotateY(180deg)] text-[#d5d5d5]">
-                        <h3 class="text-2xl font-bold text-white mb-6 tracking-wide border-b border-[#333] pb-4">Personal Info</h3>
-                        
-                        <div class="flex flex-col gap-5 text-sm md:text-base">
-                            <div>
-                                <span class="text-[#6366f1] font-bold block text-xs tracking-wider uppercase mb-1">Nationality</span>
-                                <span class="font-medium text-white flex items-center gap-2">Filipino</span>
-                            </div>
-                            <div>
-                                <span class="text-[#6366f1] font-bold block text-xs tracking-wider uppercase mb-1">Language</span>
-                                <span class="font-medium text-white">Tagalog, English</span>
-                            </div>
-                            <div>
-                                <span class="text-[#6366f1] font-bold block text-xs tracking-wider uppercase mb-1">Email</span>
-                                <a href="mailto:jrederio01@gmail.com" class="font-medium text-white hover:text-[#6366f1] transition-colors">jrederio01@gmail.com</a>
-                            </div>
-                            <div>
-                                <span class="text-[#6366f1] font-bold block text-xs tracking-wider uppercase mb-1">Location</span>
-                                <span class="font-medium text-white leading-relaxed block">P-1A Ampayon Butuan City Mindanao, Philippines</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <!-- Education & Experience Section -->
-    <section id="resume" class="w-full relative z-10 bg-[#f4f4f4] text-[#111] overflow-hidden">
-        <!-- Abstract light background pattern -->
-        <div class="absolute inset-0 z-0 pointer-events-none opacity-[0.03]">
-            <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                <path d="M-100,-100 Q300,-50 400,200 T800,-50" fill="none" stroke="black" stroke-width="80"
-                    stroke-linecap="round" />
-                <path d="M200,800 Q600,600 800,400 T1200,900" fill="none" stroke="black" stroke-width="120"
-                    stroke-linecap="round" />
-                <path d="M800,-100 Q900,300 1200,200 T1800,100" fill="none" stroke="black" stroke-width="100"
-                    stroke-linecap="round" />
-                <path d="M-50,400 Q150,500 250,700 T500,1200" fill="none" stroke="black" stroke-width="90"
-                    stroke-linecap="round" />
-            </svg>
-        </div>
+    <!-- ===================== ABOUT ===================== -->
+    <section id="about" class="w-full border-t border-line py-24 md:py-32 px-6 md:px-10 lg:px-14">
+        <div class="w-full max-w-[1400px] mx-auto">
 
-        <div
-            class="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-gray-300 relative z-10">
-
-            <!-- EDUCATION COLUMN -->
-            <div class="py-16 px-8 md:px-12 lg:px-20 lg:py-24">
-                <h2 class="text-2xl md:text-3xl font-bold mb-10 tracking-wide text-black observe-animate">EDUCATION</h2>
-
-                <div class="flex flex-col gap-6">
-
-
-                    <!-- Item 1 - Senior High School -->
-                    <div
-                        class="bg-[#dfdfdf] rounded-xl p-6 border border-[#c8c8c8] observe-animate delay-200 hover:-translate-y-1 transition-transform">
-                        
-                        <!-- Program -->
-                        <h3 class="text-[#111] font-bold text-lg mb-2 tracking-wide">Technical Vocational Livelihood</h3>
-
-                        <!-- Date Badge -->
-                        <span class="inline-block bg-[#6366f1]/10 text-[#6366f1] text-xs px-4 py-1.5 rounded-full tracking-wide font-semibold mb-3 border border-[#6366f1]/20">2014 – 2019</span>
-
-                        <!-- Institution -->
-                        <p class="text-[#6366f1] text-sm font-bold mb-1">Father Urios Institute of Technology of Ampayon Incorporated</p>
-
-                        <!-- Program Details -->
-                        <p class="text-[#555] text-[13px] leading-relaxed">Computer System Servicing / Visual Graphic Design</p>
-                    </div>
-
-                    <!-- Item 2 - College -->
-                    <div
-                        class="bg-[#dfdfdf] rounded-xl p-6 border border-[#c8c8c8] observe-animate delay-300 hover:-translate-y-1 transition-transform">
-                        
-                        <!-- Degree -->
-                        <h3 class="text-[#111] font-bold text-lg mb-2 tracking-wide">Bachelor of Science in Information Technology</h3>
-
-                        <!-- Date Badge -->
-                        <span class="inline-block bg-[#6366f1]/10 text-[#6366f1] text-xs px-4 py-1.5 rounded-full tracking-wide font-semibold mb-3 border border-[#6366f1]/20">2022 – 2026</span>
-
-                        <!-- Institution -->
-                        <p class="text-[#6366f1] text-sm font-bold mb-1">Caraga State University – Cabadbaran Campus</p>
-
-                        <!-- Program Details -->
-                        <p class="text-[#555] text-[13px] leading-relaxed">Major in Information Technology</p>
-                    </div>
-                </div>
+            <!-- Section Label -->
+            <div class="flex items-center gap-4 mb-14 observe-animate">
+                <span class="label text-muted">01</span>
+                <div class="h-px w-10 bg-line"></div>
+                <span class="label text-muted">About me</span>
             </div>
 
-            <!-- EXPERIENCE COLUMN -->
-            <div class="py-16 px-8 md:px-12 lg:px-20 lg:py-24">
-                <h2 class="text-2xl md:text-3xl font-bold mb-10 tracking-wide text-black observe-animate">EXPERIENCE
-                </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-14 lg:gap-24 items-start">
 
-                <div class="flex flex-col gap-6">
+                <!-- Left: Copy -->
+                <div class="observe-animate">
+                    <h2 class="display text-5xl md:text-6xl lg:text-7xl mb-10 min-h-[3.5rem] md:min-h-[4.5rem]">
+                        <span id="typing-hello" class="typing-cursor" data-text="Nice to meet you."></span>
+                    </h2>
 
+                    <p class="text-muted text-[15px] md:text-base leading-relaxed font-light mb-5 max-w-xl">
+                        I&rsquo;m Edmundo C. Ederio Jr. a  Full-Stack Developer,Mobile App Developer, Graphic Designer, and UI/UX Designer who
+                        takes pride in building things that are both beautiful and functional.
+                    </p>
+                    <p class="text-muted text-[15px] md:text-base leading-relaxed font-light mb-5 max-w-xl">
+                        I design clean, high-quality visuals and develop secure, well-structured systems from
+                        pixel-perfect interfaces to reliable back-end logic. My work is always detailed, accurate, and
+                        built around the real needs of the people I serve.
+                    </p>
+                    <p class="text-muted text-[15px] md:text-base leading-relaxed font-light mb-12 max-w-xl">
+                        I am focused, organized, and collaborative someone you can count on to deliver quality work,
+                        maintain trust, and go beyond what is expected.
+                    </p>
 
-                    <!-- Item - MGS Production (Detailed) -->
-                    <div
-                        class="bg-[#dfdfdf] rounded-xl p-6 border border-[#c8c8c8] observe-animate delay-200 hover:-translate-y-1 transition-transform">
-                        
-                        <!-- Role Title -->
-                        <h3 class="text-[#111] font-bold text-lg mb-2 tracking-wide">Head Graphic Designer / Photographer</h3>
-
-                        <!-- Date Badge -->
-                        <span class="inline-block bg-[#6366f1]/10 text-[#6366f1] text-xs px-4 py-1.5 rounded-full tracking-wide font-semibold mb-3 border border-[#6366f1]/20">2019 – Present</span>
-
-                        <!-- Company -->
-                        <p class="text-[#6366f1] text-sm font-bold mb-1">MGS Production</p>
-
-                        <!-- Description -->
-                        <p class="text-[#555] text-[13px] leading-relaxed mb-5">
-                            Leading the creative design team in developing visual materials for events, marketing campaigns, branding projects, and client-based productions. Responsible for overseeing design quality, directing creative concepts, and ensuring the successful delivery of visual content from planning to final production.
-                        </p>
-
-                        <!-- Bullet Points -->
-                        <div class="flex flex-col gap-2.5">
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Led the design and creative direction of various client and production projects</span>
-                            </div>
-                            
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Designed posters, tarpaulins, social media graphics, invitations, and promotional content</span>
-                            </div>
-                            
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Conducted professional photography and photo documentation for events and commercial projects</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Performed advanced photo editing, retouching, and image enhancement</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Collaborated with clients and team members to transform concepts into effective visual solutions</span>
-                            </div>
-                           
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Mentored and guided team members on design concepts, workflows, and creative execution</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Utilized Adobe Photoshop, Lightroom, InDesign, and other creative tools to deliver impactful visual content</span>
-                            </div>
+                    <!-- Contact details -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 border-y border-line py-8 mb-12 max-w-xl">
+                        <div>
+                            <p class="label text-muted mb-2">Phone</p>
+                            <p class="text-sm">09458573462</p>
+                        </div>
+                        <div>
+                            <p class="label text-muted mb-2">Email</p>
+                            <a href="mailto:jrederio01@gmail.com"
+                                class="block text-sm hover:text-muted transition-colors break-all">jrederio01@gmail.com</a>
+                        </div>
+                        <div>
+                            <p class="label text-muted mb-2">Based in</p>
+                            <p class="text-sm">Butuan City, PH</p>
                         </div>
                     </div>
 
-                    <!-- Item 1 - OJT (Detailed) -->
-                    <div
-                        class="bg-[#dfdfdf] rounded-xl p-6 border border-[#c8c8c8] observe-animate delay-100 hover:-translate-y-1 transition-transform">
-                        
-                        <!-- Role Title -->
-                        <h3 class="text-[#111] font-bold text-lg mb-2 tracking-wide">Management Information System (MIS) Intern / On-the-Job Trainee (OJT)</h3>
-
-                        <!-- Date Badge -->
-                        <span class="inline-block bg-[#6366f1]/10 text-[#6366f1] text-xs px-4 py-1.5 rounded-full tracking-wide font-semibold mb-3 border border-[#6366f1]/20">2024 – 2025</span>
-
-                        <!-- Institution -->
-                        <p class="text-[#999] text-[13px] mb-4 font-medium">Caraga State University – Cabadbaran Campus</p>
-
-                        <!-- Description -->
-                        <p class="text-[#555] text-[13px] leading-relaxed mb-5">
-                            Completed an On-the-Job Training (OJT) program under the Management Information System (MIS) Office, providing technical support and assisting in the maintenance of the university's IT infrastructure. Gained hands-on experience in computer systems, networking, troubleshooting, and technical operations within an educational institution.
-                        </p>
-
-                        <!-- Bullet Points -->
-                        <div class="flex flex-col gap-2.5">
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Provided technical support for faculty, staff, and university offices</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Installed, configured, and maintained computer hardware and software systems</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Assisted in network setup, cable management, and network troubleshooting</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Diagnosed and resolved computer, printer, and connectivity issues</span>
-                            </div>
-                            
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Assisted in the installation and maintenance of networking equipment</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Supported Microsoft Office and Windows-related technical concerns</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Applied problem-solving and troubleshooting techniques to ensure operational efficiency</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Collaborated with MIS personnel in maintaining the university's technology infrastructure</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Developed practical experience in IT support, networking, system administration, and workplace professionalism</span>
+                    <!-- Get in touch -->
+                    <div class="flex flex-col gap-5">
+                        <div class="flex flex-wrap items-center gap-6">
+                            <a href="#contact"
+                                class="text-lg md:text-xl rule-link hover:text-muted transition-colors font-light">
+                                Get in touch
+                            </a>
+                            <div class="flex items-center gap-5 text-ink">
+                                <a href="mailto:jrederio01@gmail.com" class="hover:text-muted transition-colors"
+                                    aria-label="Email">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.linkedin.com/in/edmundo-ederio-125208386/" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="hover:text-muted transition-colors font-semibold text-lg tracking-tight"
+                                    aria-label="LinkedIn">in</a>
+                                <a href="https://github.com/EdzZ29" target="_blank" rel="noopener noreferrer"
+                                    class="hover:text-muted transition-colors" aria-label="GitHub">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                                <a href="https://www.facebook.com/JrEderio" target="_blank" rel="noopener noreferrer"
+                                    class="hover:text-muted transition-colors" aria-label="Facebook">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.876h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10z" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.instagram.com/edzlds/" target="_blank" rel="noopener noreferrer"
+                                    class="hover:text-muted transition-colors" aria-label="Instagram">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.tiktok.com/@jrederio" target="_blank" rel="noopener noreferrer"
+                                    class="hover:text-muted transition-colors" aria-label="TikTok">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Item 3 - Capstone Project (Detailed) -->
-                    <div
-                        class="bg-[#dfdfdf] rounded-xl p-6 border border-[#c8c8c8] observe-animate delay-300 hover:-translate-y-1 transition-transform">
-                        
-                        <!-- Role Title -->
-                        <h3 class="text-[#111] font-bold text-lg mb-2 tracking-wide">Lead Developer / Programmer</h3>
-
-                        <!-- Date Badge -->
-                        <span class="inline-block bg-[#6366f1]/10 text-[#6366f1] text-xs px-4 py-1.5 rounded-full tracking-wide font-semibold mb-3 border border-[#6366f1]/20">2025 – 2026</span>
-
-                        <!-- Project Name -->
-                        <p class="text-[#6366f1] text-sm font-bold mb-1">AI-Integrated OBE Grading System (Capstone Project)</p>
-
-                        <!-- Institution -->
-                        <p class="text-[#999] text-[13px] mb-4 font-medium">Caraga State University – Cabadbaran Campus</p>
-
-                        <!-- Description -->
-                        <p class="text-[#555] text-[13px] leading-relaxed mb-5">
-                            Designed and developed an AI-integrated Outcome-Based Education (OBE) Grading System that automates class record management, grading processes, and student performance monitoring. The system utilizes data-driven analytics to help instructors track academic progress and identify students requiring intervention.
-                        </p>
-
-                        <!-- Bullet Points -->
-                        <div class="flex flex-col gap-2.5">
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Led the design, architecture, and development of the entire system</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Developed responsive and user-friendly interfaces for desktop and mobile devices</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Implemented automated grading, class record management, and report generation</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Integrated AI-powered student performance monitoring and analytics</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Designed and optimized database structures and system workflows</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Ensured compliance with university grading policies and OBE standards</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Collaborated with team members throughout planning, development, testing, and deployment</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Conducted system testing, debugging, and performance optimization</span>
-                            </div>
-                            <div class="flex items-start gap-2.5">
-                                <svg class="w-4 h-4 text-[#6366f1] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4"/></svg>
-                                <span class="text-[#444] text-[13px] leading-relaxed">Applied Laravel, Nuxt.js,Nest.js, PostgreSQL, and modern web development practices to build a scalable solution</span>
-                            </div>
+                        <div>
+                            <a href="Ederio,%20Resume.pdf" download="Ederio Resume.pdf"
+                                class="inline-flex items-center gap-2.5 px-7 py-3.5 border border-ink rounded-full text-ink hover:bg-ink hover:text-paper transition-all duration-300 text-[13px] tracking-widest font-medium uppercase">
+                                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                Download Resume
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+                <!-- Right: Portrait card with flip -->
+                <div class="w-full flex justify-center lg:justify-end observe-animate delay-200 group [perspective:1200px]">
+                    <div
+                        class="w-full max-w-[440px] aspect-[4/5] relative transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] cursor-pointer">
 
-    </section>
+                        <!-- Front Side (Image) -->
+                        <div class="absolute inset-0 bg-chalk overflow-hidden [backface-visibility:hidden]">
+                            <img src="./formal-attire.png" alt="Edmundo C. Ederio Jr."
+                                class="portrait w-full h-full object-cover object-top" />
+                        </div>
 
-    <!-- Tools Section -->
-    <section id="tools" class="py-24 px-8 md:px-16 lg:px-24 w-full max-w-[1400px] mx-auto z-10 relative">
-        <h2
-            class="text-3xl md:text-4xl font-bold text-white mb-16 tracking-wide drop-shadow-lg observe-animate uppercase">
-            TOOLS THAT I USE
-        </h2>
+                        <!-- Back Side (Personal Info) -->
+                        <div
+                            class="absolute inset-0 bg-white border border-line overflow-hidden flex flex-col justify-center p-10 [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                            <h3 class="label text-muted mb-8 pb-5 border-b border-line">Personal Info</h3>
 
-        <div class="flex flex-wrap gap-8 md:gap-12 lg:gap-16 items-center justify-center lg:justify-start">
+                            <div class="flex flex-col gap-6">
+                                <div>
+                                    <span class="label text-muted block mb-1.5">Nationality</span>
+                                    <span class="text-sm">Filipino</span>
+                                </div>
+                                <div>
+                                    <span class="label text-muted block mb-1.5">Language</span>
+                                    <span class="text-sm">Tagalog, English</span>
+                                </div>
+                                <div>
+                                    <span class="label text-muted block mb-1.5">Email</span>
+                                    <a href="mailto:jrederio01@gmail.com"
+                                        class="text-sm hover:text-muted transition-colors break-all">jrederio01@gmail.com</a>
+                                </div>
+                                <div>
+                                    <span class="label text-muted block mb-1.5">Location</span>
+                                    <span class="text-sm leading-relaxed block">P-1A Ampayon Butuan City Mindanao,
+                                        Philippines</span>
+                                </div>
+                            </div>
+                        </div>
 
-            <!-- Photoshop -->
-            <div class="relative group cursor-pointer observe-animate delay-100 flex flex-col items-center w-24">
-                <div
-                    class="w-16 h-16 bg-[#001D26] border-2 border-[#31A8FF] rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 shadow-lg group-hover:shadow-[0_0_25px_#31A8FF]">
-                    <span class="text-[#31A8FF] font-bold text-2xl font-sans tracking-tighter">Ps</span>
+                    </div>
                 </div>
-                <span
-                    class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#31A8FF] transition-colors">Photoshop</span>
+
             </div>
-
-            <!-- Premiere Pro -->
-            <div class="relative group cursor-pointer observe-animate delay-[150ms] flex flex-col items-center w-24">
-                <div
-                    class="w-16 h-16 bg-[#00005B] border-2 border-[#E98BFF] rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 shadow-lg group-hover:shadow-[0_0_25px_#E98BFF]">
-                    <span class="text-[#E98BFF] font-bold text-2xl font-sans tracking-tighter">Pr</span>
-                </div>
-                <span
-                    class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#E98BFF] transition-colors">Premiere</span>
-            </div>
-
-            <!-- InDesign -->
-            <div class="relative group cursor-pointer observe-animate delay-200 flex flex-col items-center w-24">
-                <div
-                    class="w-16 h-16 bg-[#4A0023] border-2 border-[#FF3366] rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 shadow-lg group-hover:shadow-[0_0_25px_#FF3366]">
-                    <span class="text-[#FF3366] font-bold text-2xl font-sans tracking-tighter">Id</span>
-                </div>
-                <span
-                    class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#FF3366] transition-colors">InDesign</span>
-            </div>
-
-            <!-- Figma -->
-            <div class="relative group cursor-pointer observe-animate delay-[250ms] flex flex-col items-center w-24">
-                <div
-                    class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#F24E1E]">
-                    <svg viewBox="0 0 38 57" class="w-10 h-14" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE" />
-                        <path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0ACF83" />
-                        <path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262" />
-                        <path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E" />
-                        <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF" />
-                    </svg>
-                </div>
-                <span
-                    class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#F24E1E] transition-colors">Figma</span>
-            </div>
-
-            <!-- Canva -->
-            <div class="relative group cursor-pointer observe-animate delay-300 flex flex-col items-center w-24">
-                <div
-                    class="w-16 h-16 bg-[#0f0f0f] rounded-full flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 shadow-lg group-hover:shadow-[0_0_25px_#00C4CC] border border-[#2a2a2a]">
-                    <span
-                        class="text-[#2a2a2a] group-hover:text-white font-serif italic font-bold text-3xl transition-colors duration-300">C</span>
-                </div>
-                <span
-                    class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#00C4CC] transition-colors">Canva</span>
-            </div>
-
-            <!-- Claude -->
-            <div class="relative group cursor-pointer observe-animate delay-[350ms] flex flex-col items-center w-24">
-                <div
-                    class="w-16 h-16 flex items-center justify-center transition-all duration-500 group-hover:-translate-y-3 group-hover:scale-110 group-hover:rotate-90 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#D97757]">
-                    <svg viewBox="0 0 100 100" class="w-12 h-12 text-[#D97757]" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M50 0L56 35L90 15L70 45L100 60L65 65L75 100L45 75L15 95L25 60L0 45L35 35L15 5L45 25Z"
-                            fill="currentColor" />
-                    </svg>
-                </div>
-                <span
-                    class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#D97757] transition-colors">Claude</span>
-            </div>
-
-            <!-- Excel -->
-            <div class="relative group cursor-pointer observe-animate delay-400 flex flex-col items-center w-24">
-                <div
-                    class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#217346]">
-                    <svg viewBox="0 0 48 48" class="w-12 h-12" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="16" y="8" width="32" height="32" fill="#217346" rx="4" />
-                        <path d="M25 18h5l3 7 3-7h5l-5.5 10.5L41 39h-5l-3.5-7.5L29 39h-5l6-11-5-10z" fill="#fff" />
-                        <rect x="0" y="14" width="22" height="20" fill="#107C41" rx="2" />
-                        <path d="M6 18h2l3 4 3-4h2l-4 6 4.5 6h-2.5l-3.5-5-3.5 5H4l4.5-6L6 18z" fill="#fff" />
-                    </svg>
-                </div>
-                <span
-                    class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#217346] transition-colors">Excel</span>
-            </div>
-
-            <!-- Word -->
-            <div class="relative group cursor-pointer observe-animate delay-[450ms] flex flex-col items-center w-24">
-                <div
-                    class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#2B579A]">
-                    <svg viewBox="0 0 48 48" class="w-12 h-12" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="16" y="8" width="32" height="32" fill="#185ABD" rx="4" />
-                        <path d="M8 14h24v20H8z" fill="#2B579A" />
-                        <rect x="0" y="14" width="22" height="20" fill="#2B579A" rx="2" />
-                        <path
-                            d="M3.5 18H6l2 7.5c.3 1 .5 2 .5 2h.1s.2-1 .5-2L11.5 18h2l-3.5 11H8L6 21.5c-.2-.8-.4-1.5-.4-1.5h-.1s-.2.7-.4 1.5L3 29H.5L3.5 18z"
-                            fill="#fff" />
-                    </svg>
-                </div>
-                <span
-                    class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#2B579A] transition-colors">Word</span>
-            </div>
-
-            <!-- Power BI -->
-            <div class="relative group cursor-pointer observe-animate delay-[500ms] flex flex-col items-center w-24">
-                <div
-                    class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#F2C811]">
-                    <svg viewBox="0 0 32 32" class="w-14 h-14" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 28h5V16h-5z" fill="#E6AD10" />
-                        <path d="M19 28h5V8h-5z" fill="#F2C811" />
-                        <path d="M5 28h5v-6H5z" fill="#E6AD10" opacity=".6" />
-                    </svg>
-                </div>
-                <span
-                    class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#F2C811] transition-colors">Power
-                    BI</span>
-            </div>
-
-            <!-- Laravel -->
-            <!-- Moving Laravel to the developer section below -->
-
-        </div>
-
-        <h3
-            class="text-2xl md:text-3xl font-bold text-white mt-24 mb-16 tracking-wide drop-shadow-lg observe-animate uppercase">
-            DEVELOPER TOOLS
-        </h3>
-
-        <div class="flex flex-wrap gap-8 md:gap-12 lg:gap-16 items-center justify-center lg:justify-start">
-
-            <!-- Nuxt Js -->
-            <div class="relative group cursor-pointer observe-animate delay-100 flex flex-col items-center w-24">
-                <div class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#00DC82]">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg" alt="Nuxt Js" class="w-12 h-12">
-                </div>
-                <span class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#00DC82] transition-colors">Nuxt Js</span>
-            </div>
-
-            <!-- Nest Js -->
-            <div class="relative group cursor-pointer observe-animate delay-[150ms] flex flex-col items-center w-24">
-                <div class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#E0234E]">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg" alt="Nest Js" class="w-12 h-12">
-                </div>
-                <span class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#E0234E] transition-colors">Nest Js</span>
-            </div>
-
-            <!-- React Js -->
-            <div class="relative group cursor-pointer observe-animate delay-200 flex flex-col items-center w-24">
-                <div class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#61DAFB]">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Js" class="w-12 h-12">
-                </div>
-                <span class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#61DAFB] transition-colors">React Js</span>
-            </div>
-
-            <!-- Vue Js -->
-            <div class="relative group cursor-pointer observe-animate delay-[225ms] flex flex-col items-center w-24">
-                <div class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#4FC08D]">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue Js" class="w-12 h-12">
-                </div>
-                <span class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#4FC08D] transition-colors">Vue Js</span>
-            </div>
-
-            <!-- Laravel -->
-            <div class="relative group cursor-pointer observe-animate delay-[250ms] flex flex-col items-center w-24">
-                <div
-                    class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#FF2D20]">
-                    <svg viewBox="0 0 50 50" class="w-14 h-14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M25 5L5 15L25 25L45 15L25 5Z" stroke="#FF2D20" stroke-width="3"
-                            stroke-linejoin="round" />
-                        <path d="M5 15V35L25 45V25L5 15Z" stroke="#FF2D20" stroke-width="3" stroke-linejoin="round" />
-                        <path d="M45 15V25" stroke="#FF2D20" stroke-width="3" stroke-linecap="round" />
-                        <path d="M32 23L42 28L42 38L32 33V23Z" stroke="#FF2D20" stroke-width="3"
-                            stroke-linejoin="round" />
-                    </svg>
-                </div>
-                <span
-                    class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#FF2D20] transition-colors">Laravel</span>
-            </div>
-
-            <!-- HTML -->
-            <div class="relative group cursor-pointer observe-animate delay-300 flex flex-col items-center w-24">
-                <div class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#E34F26]">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" class="w-12 h-12">
-                </div>
-                <span class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#E34F26] transition-colors">HTML</span>
-            </div>
-
-            <!-- CSS -->
-            <div class="relative group cursor-pointer observe-animate delay-[350ms] flex flex-col items-center w-24">
-                <div class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#1572B6]">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" class="w-12 h-12">
-                </div>
-                <span class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#1572B6] transition-colors">CSS</span>
-            </div>
-
-            <!-- JavaScript -->
-            <div class="relative group cursor-pointer observe-animate delay-400 flex flex-col items-center w-24">
-                <div class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#F7DF1E]">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-12 h-12">
-                </div>
-                <span class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#F7DF1E] transition-colors">JavaScript</span>
-            </div>
-
-            <!-- PostgreSQL -->
-            <div class="relative group cursor-pointer observe-animate delay-[450ms] flex flex-col items-center w-24">
-                <div class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#336791]">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="w-12 h-12">
-                </div>
-                <span class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#336791] transition-colors">PostgreSQL</span>
-            </div>
-
-            <!-- Tailwind CSS -->
-            <div class="relative group cursor-pointer observe-animate delay-[500ms] flex flex-col items-center w-24">
-                <div class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#06B6D4]">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" class="w-12 h-12">
-                </div>
-                <span class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#06B6D4] transition-colors">Tailwind CSS</span>
-            </div>
-
-            <!-- VS Code -->
-            <div class="relative group cursor-pointer observe-animate delay-[550ms] flex flex-col items-center w-24">
-                <div
-                    class="w-16 h-16 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_25px_#007ACC]">
-                    <svg viewBox="0 0 100 100" class="w-14 h-14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M72 15L24 75L12 65L65 25L72 15Z" fill="#0066B8" />
-                        <path d="M26 25L75 75L88 65L35 15L26 25Z" fill="#007ACC" />
-                        <path d="M75 15V85L88 95V5L75 15Z" fill="#00599E" />
-                    </svg>
-                </div>
-                <span
-                    class="text-gray-400 font-medium text-sm mt-4 tracking-wide group-hover:text-[#007ACC] transition-colors">VS
-                    Code</span>
-            </div>
-
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-32 w-full relative z-10 px-8 md:px-16 lg:px-24">
-        <div
-            class="w-full max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-center justify-center">
+    <!-- ===================== EDUCATION & EXPERIENCE ===================== -->
+    <section id="resume" class="w-full border-t border-line bg-white py-24 md:py-32 px-6 md:px-10 lg:px-14">
+        <div class="w-full max-w-[1400px] mx-auto">
 
-            <!-- Left Side: Megaphone & Heading -->
-            <div class="flex flex-col items-center lg:items-end text-center lg:text-right observe-animate lg:w-1/2">
-                <div class="w-32 h-32 md:w-48 md:h-48 mb-8 animate-pulse text-[#6366f1]">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                        class="w-full h-full drop-shadow-[0_0_20px_rgba(99,102,241,0.6)]">
-                        <path d="m3 11 18-5v12L3 14v-3z" />
-                        <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
-                    </svg>
-                </div>
-                <h2
-                    class="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-wide uppercase drop-shadow-lg">
-                    WHAT I <span class="text-[#6366f1]">OFFER</span>
-                </h2>
+            <!-- Section Label -->
+            <div class="flex items-center gap-4 mb-6 observe-animate">
+                <span class="label text-muted">02</span>
+                <div class="h-px w-10 bg-line"></div>
+                <span class="label text-muted">Education &amp; Experience</span>
             </div>
 
-            <!-- Right Side: Services List -->
-            <div class="flex flex-col gap-4 text-left observe-animate delay-200 lg:w-1/2 w-full max-w-md">
+            <h2 class="display text-4xl md:text-5xl lg:text-6xl mb-16 observe-animate">Where I&rsquo;ve been</h2>
 
-                <div
-                    class="bg-[#1a1a1a]/80 backdrop-blur-sm rounded-xl p-5 border border-[#333] hover:border-[#6366f1] transition-all duration-300 hover:translate-x-3 flex items-center gap-5 shadow-lg group cursor-default">
-                    <div class="bg-[#2a2a2a] p-2 rounded-lg group-hover:bg-[#6366f1]/20 transition-colors duration-300">
-                        <svg class="w-6 h-6 text-[#6366f1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
-                            </path>
-                        </svg>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20">
+
+                <!-- EDUCATION COLUMN -->
+                <div>
+                    <h3 class="label text-muted pb-4 mb-8 border-b border-line observe-animate">Education</h3>
+
+                    <div class="flex flex-col gap-5">
+
+                        <!-- Item 1 - Senior High School -->
+                        <div
+                            class="border border-line p-7 observe-animate delay-200 hover:border-ink/25 transition-colors">
+                            <span
+                                class="inline-block border border-line rounded-full px-3.5 py-1 label text-muted mb-4">2014
+                                &ndash; 2019</span>
+                            <h4 class="text-lg font-medium mb-2 tracking-tight">Technical Vocational Livelihood</h4>
+                            <p class="text-sm font-medium mb-1.5">Father Urios Institute of Technology of Ampayon
+                                Incorporated</p>
+                            <p class="text-muted text-[13px] leading-relaxed">Computer System Servicing / Visual Graphic
+                                Design</p>
+                        </div>
+
+                        <!-- Item 2 - College -->
+                        <div
+                            class="border border-line p-7 observe-animate delay-300 hover:border-ink/25 transition-colors">
+                            <span
+                                class="inline-block border border-line rounded-full px-3.5 py-1 label text-muted mb-4">2022
+                                &ndash; 2026</span>
+                            <h4 class="text-lg font-medium mb-2 tracking-tight">Bachelor of Science in Information
+                                Technology</h4>
+                            <p class="text-sm font-medium mb-1.5">Caraga State University &ndash; Cabadbaran Campus</p>
+                            <p class="text-muted text-[13px] leading-relaxed">Major in Information Technology</p>
+                        </div>
                     </div>
-                    <span
-                        class="text-lg font-bold text-white tracking-wide group-hover:text-[#6366f1] transition-colors">Graphic
-                        Design</span>
                 </div>
 
-                <div
-                    class="bg-[#1a1a1a]/80 backdrop-blur-sm rounded-xl p-5 border border-[#333] hover:border-[#6366f1] transition-all duration-300 hover:translate-x-3 flex items-center gap-5 shadow-lg group cursor-default delay-[50ms]">
-                    <div class="bg-[#2a2a2a] p-2 rounded-lg group-hover:bg-[#6366f1]/20 transition-colors duration-300">
-                        <svg class="w-6 h-6 text-[#6366f1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
-                            </path>
-                        </svg>
+                <!-- EXPERIENCE COLUMN -->
+                <div>
+                    <h3 class="label text-muted pb-4 mb-8 border-b border-line observe-animate">Experience</h3>
+
+                    <div class="flex flex-col gap-5">
+
+                        <!-- Item - BizFREND Digital Solution -->
+                        <div
+                            class="border border-line p-7 observe-animate delay-100 hover:border-ink/25 transition-colors">
+                            <div class="flex flex-wrap items-center gap-2 mb-4">
+                                <span class="inline-block border border-line rounded-full px-3.5 py-1 label text-muted">June
+                                    2026 &ndash; Present</span>
+                                <span class="inline-block bg-chalk rounded-full px-3.5 py-1 label text-muted">Part-time</span>
+                            </div>
+                            <h4 class="text-lg font-medium mb-2 tracking-tight">Full Stack Developer / App Developer
+                            </h4>
+                            <a href="https://bizfrend.com/" target="_blank" rel="noopener noreferrer"
+                                class="group inline-flex flex-col items-start gap-3">
+                                <img src="./image.png" alt="BizFREND Digital Solution" class="h-5 w-auto" />
+                                <span
+                                    class="inline-flex items-center gap-1.5 text-[13px] text-muted rule-link group-hover:text-ink transition-colors">
+                                    bizfrend.com
+                                    <span aria-hidden="true">&#8599;</span>
+                                </span>
+                            </a>
+                        </div>
+
+                        <!-- Item - MGS Production -->
+                        <div
+                            class="border border-line p-7 observe-animate delay-200 hover:border-ink/25 transition-colors">
+                            <span
+                                class="inline-block border border-line rounded-full px-3.5 py-1 label text-muted mb-4">2019
+                                &ndash; Present</span>
+                            <h4 class="text-lg font-medium mb-2 tracking-tight">Head Graphic Designer / Photographer
+                            </h4>
+                            <p class="text-sm font-medium">MGS Production</p>
+                        </div>
+
+                        <!-- Item - OJT -->
+                        <div
+                            class="border border-line p-7 observe-animate delay-300 hover:border-ink/25 transition-colors">
+                            <span
+                                class="inline-block border border-line rounded-full px-3.5 py-1 label text-muted mb-4">2024
+                                &ndash; 2025</span>
+                            <h4 class="text-lg font-medium mb-2 tracking-tight">Management Information System (MIS)
+                                Intern / On-the-Job Trainee (OJT)</h4>
+                            <p class="text-sm font-medium">Caraga State University &ndash; Cabadbaran Campus</p>
+                        </div>
+
+                        <!-- Item - Capstone Project -->
+                        <div
+                            class="border border-line p-7 observe-animate delay-[400ms] hover:border-ink/25 transition-colors">
+                            <span
+                                class="inline-block border border-line rounded-full px-3.5 py-1 label text-muted mb-4">2025
+                                &ndash; 2026</span>
+                            <h4 class="text-lg font-medium mb-2 tracking-tight">Lead Developer / Programmer</h4>
+                            <p class="text-sm font-medium mb-1.5">AI-Integrated OBE Grading System (Capstone Project)</p>
+                            <p class="text-muted text-[13px]">Caraga State University &ndash; Cabadbaran Campus</p>
+                        </div>
                     </div>
-                    <span
-                        class="text-lg font-bold text-white tracking-wide group-hover:text-[#6366f1] transition-colors">UX/UI
-                        Design</span>
                 </div>
 
-                <div
-                    class="bg-[#1a1a1a]/80 backdrop-blur-sm rounded-xl p-5 border border-[#333] hover:border-[#6366f1] transition-all duration-300 hover:translate-x-3 flex items-center gap-5 shadow-lg group cursor-default delay-[100ms]">
-                    <div class="bg-[#2a2a2a] p-2 rounded-lg group-hover:bg-[#6366f1]/20 transition-colors duration-300">
-                        <svg class="w-6 h-6 text-[#6366f1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
-                            </path>
-                        </svg>
-                    </div>
-                    <span
-                        class="text-lg font-bold text-white tracking-wide group-hover:text-[#6366f1] transition-colors">Website
-                        Design</span>
-                </div>
-
-                <div
-                    class="bg-[#1a1a1a]/80 backdrop-blur-sm rounded-xl p-5 border border-[#333] hover:border-[#6366f1] transition-all duration-300 hover:translate-x-3 flex items-center gap-5 shadow-lg group cursor-default delay-[150ms]">
-                    <div class="bg-[#2a2a2a] p-2 rounded-lg group-hover:bg-[#6366f1]/20 transition-colors duration-300">
-                        <svg class="w-6 h-6 text-[#6366f1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
-                            </path>
-                        </svg>
-                    </div>
-                    <span
-                        class="text-lg font-bold text-white tracking-wide group-hover:text-[#6366f1] transition-colors">Website
-                        Development</span>
-                </div>
-
-                <div
-                    class="bg-[#1a1a1a]/80 backdrop-blur-sm rounded-xl p-5 border border-[#333] hover:border-[#6366f1] transition-all duration-300 hover:translate-x-3 flex items-center gap-5 shadow-lg group cursor-default delay-[200ms]">
-                    <div class="bg-[#2a2a2a] p-2 rounded-lg group-hover:bg-[#6366f1]/20 transition-colors duration-300">
-                        <svg class="w-6 h-6 text-[#6366f1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
-                            </path>
-                        </svg>
-                    </div>
-                    <span
-                        class="text-lg font-bold text-white tracking-wide group-hover:text-[#6366f1] transition-colors">Basic
-                        Video Editing</span>
-                </div>
-
-                <div
-                    class="bg-[#1a1a1a]/80 backdrop-blur-sm rounded-xl p-5 border border-[#333] hover:border-[#6366f1] transition-all duration-300 hover:translate-x-3 flex items-center gap-5 shadow-lg group cursor-default delay-[250ms]">
-                    <div class="bg-[#2a2a2a] p-2 rounded-lg group-hover:bg-[#6366f1]/20 transition-colors duration-300">
-                        <svg class="w-6 h-6 text-[#6366f1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
-                            </path>
-                        </svg>
-                    </div>
-                    <span
-                        class="text-lg font-bold text-white tracking-wide group-hover:text-[#6366f1] transition-colors">Encoding</span>
-                </div>
             </div>
-
         </div>
     </section>
 
-    <!-- Sample Works Section -->
-    <section id="works" class="py-24 w-full relative z-10 px-8 md:px-16 lg:px-24 bg-[#141414]">
-        <div class="w-full max-w-[1400px] mx-auto flex flex-col items-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 tracking-wide uppercase observe-animate">
-                SAMPLE WORKS
-            </h2>
-            <p class="text-[#d5d5d5] text-center max-w-2xl mb-12 observe-animate delay-100">
-                Here are a few snippets of my recent projects, I focus on delivering high-quality, impactful results.
-                You can also check my works in my <a href="https://github.com/EdzZ29" target="_blank" rel="noopener noreferrer" class="text-[#6366f1] hover:underline font-bold transition-colors">GitHub account</a>.
-            </p>
+    <!-- ===================== SERVICES ===================== -->
+    <section id="services" class="w-full border-t border-line py-24 md:py-32 px-6 md:px-10 lg:px-14">
+        <div class="w-full max-w-[1400px] mx-auto">
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full mb-12">
-                <!-- Placeholder for Works -->
-                <div
-                    class="bg-[#2a2a2a] aspect-video rounded-xl overflow-hidden observe-animate delay-200 hover:scale-105 transition-transform duration-300">
-                    <img src="./Book/lightkeeper-front-2.jpg" alt="" class="w-full h-full object-cover">
+            <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-14 lg:gap-24">
+
+                <!-- Left: Heading -->
+                <div class="lg:sticky lg:top-32 self-start observe-animate">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="label text-muted">03</span>
+                        <div class="h-px w-10 bg-line"></div>
+                        <span class="label text-muted">Services</span>
+                    </div>
+                    <h2 class="display text-5xl md:text-6xl lg:text-7xl mb-6">What I offer</h2>
+                    <p class="text-muted text-[15px] leading-relaxed font-light max-w-sm">
+                        From brand visuals to production-ready systems &mdash; a single pair of hands across design and
+                        development.
+                    </p>
                 </div>
-                <div
-                    class="bg-[#2a2a2a] aspect-video rounded-xl overflow-hidden observe-animate delay-300 hover:scale-105 transition-transform duration-300">
-                    <img src="./itemTwo/iPone.png" alt="" class="w-full h-full object-cover">
-                </div>
-                <div
-                    class="bg-[#2a2a2a] aspect-video rounded-xl overflow-hidden observe-animate delay-[400ms] hover:scale-105 transition-transform duration-300 md:col-span-2 lg:col-span-1">
-                    <img src="./itemThree/bloodtrack.png" alt="" class="w-full h-full object-cover">
+
+                <!-- Right: Numbered service rows -->
+                <div class="observe-animate delay-200 border-t border-line">
+
+                    <a href="#contact"
+                        class="group flex items-baseline gap-6 md:gap-10 py-7 border-b border-line hover:px-3 transition-all duration-300">
+                        <span class="label text-muted shrink-0">01</span>
+                        <span class="text-2xl md:text-3xl font-light tracking-tight flex-1">Graphic Design</span>
+                        <span
+                            class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
+                            aria-hidden="true">&#8599;</span>
+                    </a>
+
+                    <a href="#contact"
+                        class="group flex items-baseline gap-6 md:gap-10 py-7 border-b border-line hover:px-3 transition-all duration-300">
+                        <span class="label text-muted shrink-0">02</span>
+                        <span class="text-2xl md:text-3xl font-light tracking-tight flex-1">UX/UI Design</span>
+                        <span
+                            class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
+                            aria-hidden="true">&#8599;</span>
+                    </a>
+
+                    <a href="#contact"
+                        class="group flex items-baseline gap-6 md:gap-10 py-7 border-b border-line hover:px-3 transition-all duration-300">
+                        <span class="label text-muted shrink-0">03</span>
+                        <span class="text-2xl md:text-3xl font-light tracking-tight flex-1">Website Design</span>
+                        <span
+                            class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
+                            aria-hidden="true">&#8599;</span>
+                    </a>
+
+                    <a href="#contact"
+                        class="group flex items-baseline gap-6 md:gap-10 py-7 border-b border-line hover:px-3 transition-all duration-300">
+                        <span class="label text-muted shrink-0">04</span>
+                        <span class="text-2xl md:text-3xl font-light tracking-tight flex-1">Website Development</span>
+                        <span
+                            class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
+                            aria-hidden="true">&#8599;</span>
+                    </a>
+
+                    <a href="#contact"
+                        class="group flex items-baseline gap-6 md:gap-10 py-7 border-b border-line hover:px-3 transition-all duration-300">
+                        <span class="label text-muted shrink-0">05</span>
+                        <span class="text-2xl md:text-3xl font-light tracking-tight flex-1">Basic Video Editing</span>
+                        <span
+                            class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
+                            aria-hidden="true">&#8599;</span>
+                    </a>
+
+                    <a href="#contact"
+                        class="group flex items-baseline gap-6 md:gap-10 py-7 border-b border-line hover:px-3 transition-all duration-300">
+                        <span class="label text-muted shrink-0">06</span>
+                        <span class="text-2xl md:text-3xl font-light tracking-tight flex-1">App Development</span>
+                        <span
+                            class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
+                            aria-hidden="true">&#8599;</span>
+                    </a>
+
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="observe-animate delay-[500ms]">
+    <!-- ===================== PORTFOLIO ===================== -->
+    <section id="works" class="w-full border-t border-line bg-white py-24 md:py-32 px-6 md:px-10 lg:px-14">
+        <div class="w-full max-w-[1400px] mx-auto">
+
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+                <div class="observe-animate">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="label text-muted">04</span>
+                        <div class="h-px w-10 bg-line"></div>
+                        <span class="label text-muted">Portfolio</span>
+                    </div>
+                    <h2 class="display text-5xl md:text-6xl lg:text-7xl">Selected work</h2>
+                </div>
+
+                <p class="text-muted text-[15px] leading-relaxed font-light max-w-sm observe-animate delay-100">
+                    A few snippets of recent projects. More lives on my
+                    <a href="https://github.com/EdzZ29" target="_blank" rel="noopener noreferrer"
+                        class="text-ink rule-link hover:text-muted transition-colors">GitHub</a>.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
                 <a href="works.html"
-                    class="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-white rounded-full text-white hover:bg-white hover:text-[#0f0f0f] transition-all duration-300 text-sm tracking-widest font-bold uppercase shadow-lg shadow-white/5">
-                    View Sample Works
-                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    class="group block bg-chalk aspect-[4/5] overflow-hidden observe-animate delay-200">
+                    <img src="./Book/lightkeeper-front-2.jpg" alt="Book cover design"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]">
+                </a>
+                <a href="works.html"
+                    class="group block bg-chalk aspect-[4/5] overflow-hidden observe-animate delay-300">
+                    <img src="./itemTwo/iPone.png" alt="Kaon-Time branding"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]">
+                </a>
+                <a href="works.html"
+                    class="group block bg-chalk aspect-[4/5] overflow-hidden observe-animate delay-400">
+                    <img src="./itemThree/bloodtrack.png" alt="BloodTrack interface design"
+                        class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]">
+                </a>
+            </div>
+
+            <div class="observe-animate">
+                <a href="works.html"
+                    class="inline-flex items-center gap-3 px-8 py-4 border border-ink rounded-full text-ink hover:bg-ink hover:text-paper transition-all duration-300 text-[13px] tracking-widest font-medium uppercase">
+                    View all works
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                        </path>
                     </svg>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 bg-slate-900/50">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 observe-animate">Let's build something together.
+    <!-- ===================== TOOLS ===================== -->
+    <section id="tools" class="w-full border-t border-line py-24 md:py-32 px-6 md:px-10 lg:px-14">
+        <div class="w-full max-w-[1400px] mx-auto">
+
+            <div class="flex items-center gap-4 mb-6 observe-animate">
+                <span class="label text-muted">05</span>
+                <div class="h-px w-10 bg-line"></div>
+                <span class="label text-muted">Toolkit</span>
+            </div>
+
+            <h2 class="display text-5xl md:text-6xl lg:text-7xl mb-16 observe-animate">Tools I use</h2>
+
+            <h3 class="label text-muted pb-4 mb-10 border-b border-line observe-animate">Design &amp; Production</h3>
+
+            <div class="flex flex-wrap gap-x-8 gap-y-10 md:gap-x-12 items-start mb-24">
+
+                <!-- Photoshop -->
+                <div class="group cursor-pointer observe-animate delay-100 flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#31A8FF]">
+                        <span class="text-[#31A8FF] font-semibold text-2xl tracking-tighter">Ps</span>
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Photoshop</span>
+                </div>
+
+                <!-- Premiere Pro -->
+                <div class="group cursor-pointer observe-animate delay-[150ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#9999FF]">
+                        <span class="text-[#9999FF] font-semibold text-2xl tracking-tighter">Pr</span>
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Premiere</span>
+                </div>
+
+                <!-- InDesign -->
+                <div class="group cursor-pointer observe-animate delay-200 flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#FF3366]">
+                        <span class="text-[#FF3366] font-semibold text-2xl tracking-tighter">Id</span>
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">InDesign</span>
+                </div>
+
+                <!-- Figma -->
+                <div class="group cursor-pointer observe-animate delay-[250ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#F24E1E]">
+                        <svg viewBox="0 0 38 57" class="w-6 h-9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE" />
+                            <path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0ACF83" />
+                            <path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262" />
+                            <path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E" />
+                            <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF" />
+                        </svg>
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Figma</span>
+                </div>
+
+                <!-- Canva -->
+                <div class="group cursor-pointer observe-animate delay-300 flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#00C4CC]">
+                        <span
+                            class="text-ink group-hover:text-[#00C4CC] font-serif italic font-bold text-3xl transition-colors duration-300">C</span>
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Canva</span>
+                </div>
+
+                <!-- Claude -->
+                <div class="group cursor-pointer observe-animate delay-[350ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:-translate-y-2 group-hover:border-[#D97757]">
+                        <svg viewBox="0 0 100 100" class="w-8 h-8 text-[#D97757] transition-transform duration-500 group-hover:rotate-90"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 0L56 35L90 15L70 45L100 60L65 65L75 100L45 75L15 95L25 60L0 45L35 35L15 5L45 25Z"
+                                fill="currentColor" />
+                        </svg>
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Claude</span>
+                </div>
+
+                <!-- Excel -->
+                <div class="group cursor-pointer observe-animate delay-400 flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#217346]">
+                        <svg viewBox="0 0 48 48" class="w-8 h-8" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="16" y="8" width="32" height="32" fill="#217346" rx="4" />
+                            <path d="M25 18h5l3 7 3-7h5l-5.5 10.5L41 39h-5l-3.5-7.5L29 39h-5l6-11-5-10z" fill="#fff" />
+                            <rect x="0" y="14" width="22" height="20" fill="#107C41" rx="2" />
+                            <path d="M6 18h2l3 4 3-4h2l-4 6 4.5 6h-2.5l-3.5-5-3.5 5H4l4.5-6L6 18z" fill="#fff" />
+                        </svg>
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Excel</span>
+                </div>
+
+                <!-- Word -->
+                <div class="group cursor-pointer observe-animate delay-[450ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#2B579A]">
+                        <svg viewBox="0 0 48 48" class="w-8 h-8" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="16" y="8" width="32" height="32" fill="#185ABD" rx="4" />
+                            <path d="M8 14h24v20H8z" fill="#2B579A" />
+                            <rect x="0" y="14" width="22" height="20" fill="#2B579A" rx="2" />
+                            <path
+                                d="M3.5 18H6l2 7.5c.3 1 .5 2 .5 2h.1s.2-1 .5-2L11.5 18h2l-3.5 11H8L6 21.5c-.2-.8-.4-1.5-.4-1.5h-.1s-.2.7-.4 1.5L3 29H.5L3.5 18z"
+                                fill="#fff" />
+                        </svg>
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Word</span>
+                </div>
+
+                <!-- Power BI -->
+                <div class="group cursor-pointer observe-animate delay-[500ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#F2C811]">
+                        <svg viewBox="0 0 32 32" class="w-9 h-9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 28h5V16h-5z" fill="#E6AD10" />
+                            <path d="M19 28h5V8h-5z" fill="#F2C811" />
+                            <path d="M5 28h5v-6H5z" fill="#E6AD10" opacity=".6" />
+                        </svg>
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Power BI</span>
+                </div>
+
+            </div>
+
+            <h3 class="label text-muted pb-4 mb-10 border-b border-line observe-animate">Development</h3>
+
+            <div class="flex flex-wrap gap-x-8 gap-y-10 md:gap-x-12 items-start">
+
+                <!-- Nuxt Js -->
+                <div class="group cursor-pointer observe-animate delay-100 flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#00DC82]">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg"
+                            alt="Nuxt Js" class="w-8 h-8">
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Nuxt Js</span>
+                </div>
+
+                <!-- Nest Js -->
+                <div class="group cursor-pointer observe-animate delay-[150ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#E0234E]">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg"
+                            alt="Nest Js" class="w-8 h-8">
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Nest Js</span>
+                </div>
+
+                <!-- React Js -->
+                <div class="group cursor-pointer observe-animate delay-200 flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#61DAFB]">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                            alt="React Js" class="w-8 h-8">
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">React Js</span>
+                </div>
+
+                <!-- React Native -->
+                <div class="group cursor-pointer observe-animate delay-[210ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#61DAFB]">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/reactnative/reactnative-original.svg"
+                            alt="React Native" class="w-8 h-8">
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors text-center">React
+                        Native</span>
+                </div>
+
+                <!-- Expo -->
+                <div class="group cursor-pointer observe-animate delay-[215ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-ink">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/expo/expo-original.svg" alt="Expo"
+                            class="w-8 h-8">
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Expo</span>
+                </div>
+
+                <!-- Vue Js -->
+                <div class="group cursor-pointer observe-animate delay-[225ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#4FC08D]">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
+                            alt="Vue Js" class="w-8 h-8">
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Vue Js</span>
+                </div>
+
+                <!-- Laravel -->
+                <div class="group cursor-pointer observe-animate delay-[250ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#FF2D20]">
+                        <svg viewBox="0 0 50 50" class="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M25 5L5 15L25 25L45 15L25 5Z" stroke="#FF2D20" stroke-width="3"
+                                stroke-linejoin="round" />
+                            <path d="M5 15V35L25 45V25L5 15Z" stroke="#FF2D20" stroke-width="3"
+                                stroke-linejoin="round" />
+                            <path d="M45 15V25" stroke="#FF2D20" stroke-width="3" stroke-linecap="round" />
+                            <path d="M32 23L42 28L42 38L32 33V23Z" stroke="#FF2D20" stroke-width="3"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Laravel</span>
+                </div>
+
+                <!-- HTML -->
+                <div class="group cursor-pointer observe-animate delay-300 flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#E34F26]">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                            alt="HTML" class="w-8 h-8">
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">HTML</span>
+                </div>
+
+                <!-- CSS -->
+                <div class="group cursor-pointer observe-animate delay-[350ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#1572B6]">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"
+                            class="w-8 h-8">
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">CSS</span>
+                </div>
+
+                <!-- JavaScript -->
+                <div class="group cursor-pointer observe-animate delay-400 flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#F7DF1E]">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                            alt="JavaScript" class="w-8 h-8">
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">JavaScript</span>
+                </div>
+
+                <!-- PostgreSQL -->
+                <div class="group cursor-pointer observe-animate delay-[450ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#336791]">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                            alt="PostgreSQL" class="w-8 h-8">
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">PostgreSQL</span>
+                </div>
+
+                <!-- Supabase -->
+                <div class="group cursor-pointer observe-animate delay-[475ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#3ECF8E]">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg"
+                            alt="Supabase" class="w-8 h-8">
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Supabase</span>
+                </div>
+
+                <!-- Tailwind CSS -->
+                <div class="group cursor-pointer observe-animate delay-[500ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#06B6D4]">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+                            alt="Tailwind CSS" class="w-8 h-8">
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">Tailwind</span>
+                </div>
+
+                <!-- VS Code -->
+                <div class="group cursor-pointer observe-animate delay-[550ms] flex flex-col items-center w-20">
+                    <div
+                        class="w-16 h-16 bg-white border border-line rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:border-[#007ACC]">
+                        <svg viewBox="0 0 100 100" class="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M72 15L24 75L12 65L65 25L72 15Z" fill="#0066B8" />
+                            <path d="M26 25L75 75L88 65L35 15L26 25Z" fill="#007ACC" />
+                            <path d="M75 15V85L88 95V5L75 15Z" fill="#00599E" />
+                        </svg>
+                    </div>
+                    <span class="text-muted text-xs mt-3.5 group-hover:text-ink transition-colors">VS Code</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section id="contact" class="w-full border-t border-line bg-white py-24 md:py-32 px-6 md:px-10 lg:px-14">
+        <div class="w-full max-w-[1400px] mx-auto">
+
+            <div class="flex items-center gap-4 mb-10 observe-animate">
+                <span class="label text-muted">06</span>
+                <div class="h-px w-10 bg-line"></div>
+                <span class="label text-muted">Contact</span>
+            </div>
+
+            <h2 class="display text-5xl md:text-7xl lg:text-8xl max-w-4xl mb-10 observe-animate">
+                Let&rsquo;s build something together.
             </h2>
-            <p class="text-slate-400 text-lg mb-10 observe-animate delay-100">Feel free to reach out if you're looking
-                for a Designer, Developer, have a question, or just want to connect.</p>
+
+            <p class="text-muted text-base md:text-lg font-light max-w-xl mb-14 observe-animate delay-100">
+                Feel free to reach out if you&rsquo;re looking for a designer, a developer, have a question, or just
+                want to connect.
+            </p>
+
             <a href="mailto:jrederio01@gmail.com"
-                class="inline-block px-10 py-4 bg-primary text-white font-semibold rounded-full hover:bg-indigo-400 transition-colors shadow-lg shadow-primary/30 observe-animate delay-200">
+                class="inline-block display text-3xl md:text-5xl lg:text-6xl rule-link hover:text-muted transition-colors observe-animate delay-200">
                 jrederio01@gmail.com
             </a>
 
+            <!-- Footer -->
             <div
-                class="mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500 observe-animate delay-300">
+                class="mt-24 pt-8 border-t border-line flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-sm text-muted observe-animate delay-300">
                 <p>&copy; 2026 Ederio. All rights reserved.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
+                <div class="flex flex-wrap gap-6">
                     <a href="https://github.com/EdzZ29" target="_blank" rel="noopener noreferrer"
-                        class="hover:text-white transition-colors">GitHub</a>
+                        class="hover:text-ink transition-colors">GitHub</a>
                     <a href="https://www.linkedin.com/in/edmundo-ederio-125208386/" target="_blank"
-                        rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
+                        rel="noopener noreferrer" class="hover:text-ink transition-colors">LinkedIn</a>
                     <a href="https://www.facebook.com/JrEderio" target="_blank" rel="noopener noreferrer"
-                        class="hover:text-white transition-colors">Facebook</a>
+                        class="hover:text-ink transition-colors">Facebook</a>
+                    <a href="https://www.instagram.com/edzlds/" target="_blank" rel="noopener noreferrer"
+                        class="hover:text-ink transition-colors">Instagram</a>
                 </div>
             </div>
         </div>
@@ -1025,10 +964,10 @@
 
     <!-- Back to Top Button -->
     <a href="#home"
-        class="fixed bottom-8 right-8 bg-[#111] text-[#f4f4f4] border border-gray-700 p-3 rounded-full shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:bg-[#222] hover:-translate-y-2 transition-all duration-300 z-50 group">
-        <svg class="w-6 h-6 group-hover:text-white transition-colors" fill="none" stroke="currentColor"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        class="fixed bottom-8 right-8 bg-ink text-paper w-11 h-11 flex items-center justify-center rounded-full hover:-translate-y-1.5 transition-transform duration-300 z-50"
+        aria-label="Back to top">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
         </svg>
     </a>
 

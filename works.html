@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample Works - My Portfolio</title>
+    <title>Selected Work &mdash; Ederio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#6366f1',
-                        secondary: '#0f0f0f',
+                        paper: '#f4f4f2',
+                        ink: '#111111',
+                        muted: '#77776f',
+                        line: '#dededa',
+                        chalk: '#e9e9e5',
                     },
                     fontFamily: {
-                        sans: ['"Hepta Slab"', 'serif'],
+                        sans: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
                     }
                 }
             }
@@ -22,143 +26,226 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="./img/ederio-logo.png" type="image/x-icon">
     <style>
-        body { font-family: '"Hepta Slab"', serif; }
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            letter-spacing: -0.011em;
+        }
+
+        .display {
+            font-weight: 200;
+            letter-spacing: -0.05em;
+            line-height: 0.82;
+        }
+
+        .label {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        /* The logotype PNG is white-on-transparent - flip it for the light page */
+        .logo-ink {
+            filter: invert(1);
+        }
+
+        .rule-link {
+            text-decoration: underline;
+            text-underline-offset: 5px;
+            text-decoration-thickness: 1px;
+        }
+
         .observe-animate {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .observe-animate.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
     </style>
 </head>
-<body class="bg-[#0f0f0f] text-slate-300 overflow-x-hidden font-sans">
-    
-    <div class="fixed inset-0 z-0">
-        <img src="bg.png" alt="Background pattern" class="w-full h-full object-cover opacity-70" />
-        <div class="absolute inset-0 bg-[#0f0f0f]/90"></div>
-    </div>
 
-    <header class="text-[#d5d5d5] py-6 px-6 md:px-12 flex justify-between md:justify-center items-center font-medium text-sm md:text-base z-50 absolute top-0 w-full mix-blend-difference">
-        <div class="md:hidden text-white font-bold text-xl tracking-wider absolute left-1/2 -translate-x-1/2">WORKS</div>
-        <div class="md:hidden"></div>
-        <nav class="hidden md:flex gap-10">
-            <a href="index.html#home" class="hover:text-white transition-colors">Home</a>
-            <a href="index.html#about" class="hover:text-white transition-colors">About</a>
-            <a href="index.html#resume" class="hover:text-white transition-colors">Education & Experience</a>
-            <a href="index.html#services" class="hover:text-white transition-colors">Services</a>
-            <a href="works.html" class="text-white font-bold transition-colors">Sample Works</a>
-            <a href="index.html#tools" class="hover:text-white transition-colors">Tools I Use</a>
-            <a href="index.html#contact" class="hover:text-white transition-colors">Contact me</a>
+<body class="bg-paper text-ink overflow-x-hidden font-sans antialiased">
+
+    <!-- Top Bar -->
+    <header
+        class="fixed top-0 w-full z-50 px-6 md:px-10 lg:px-14 py-6 flex items-center justify-between bg-paper/80 backdrop-blur-md">
+
+        <a href="index.html" class="flex items-center shrink-0">
+            <img src="./img/ederio-logo.png" alt="Ederio" class="logo-ink h-5 md:h-6 w-auto" />
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-9 text-sm text-muted absolute left-1/2 -translate-x-1/2">
+            <a href="index.html#about" class="hover:text-ink transition-colors">About Me</a>
+            <a href="index.html#resume" class="hover:text-ink transition-colors">Experience</a>
+            <a href="index.html#services" class="hover:text-ink transition-colors">Services</a>
+            <a href="works.html" class="text-ink">Portfolio</a>
+            <a href="index.html#tools" class="hover:text-ink transition-colors">Tools</a>
         </nav>
-        <button id="mobile-menu-btn" class="md:hidden text-[#d5d5d5] hover:text-white focus:outline-none z-50 relative mix-blend-difference">
-            <svg id="hamburger-icon" class="w-8 h-8 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+
+        <a href="index.html#contact"
+            class="hidden lg:inline-flex items-center gap-1.5 text-sm text-ink rule-link hover:text-muted transition-colors">
+            Book A Call
+            <span aria-hidden="true">&#8599;</span>
+        </a>
+
+        <button id="mobile-menu-btn" class="lg:hidden text-ink focus:outline-none z-50 relative" aria-label="Open menu">
+            <svg id="hamburger-icon" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" d="M4 8h16M4 16h16"></path>
             </svg>
-            <svg id="close-icon" class="w-8 h-8 hidden transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            <svg id="close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" stroke-width="1.5"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
     </header>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-[#0f0f0f]/95 backdrop-blur-md z-40 hidden flex-col items-center justify-center gap-8 text-xl font-medium opacity-0 transition-opacity duration-300">
-        <a href="index.html#home" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Home</a>
-        <a href="index.html#about" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">About</a>
-        <a href="index.html#resume" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Education & Experience</a>
-        <a href="index.html#services" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Services</a>
-        <a href="works.html" class="mobile-link text-white font-bold transition-colors">Sample Works</a>
-        <a href="index.html#tools" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Tools I Use</a>
-        <a href="index.html#contact" class="mobile-link text-[#d5d5d5] hover:text-white transition-colors">Contact me</a>
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-paper z-40 hidden flex-col items-center justify-center gap-7 text-2xl font-light opacity-0 transition-opacity duration-300">
+        <a href="index.html#home" class="mobile-link hover:text-muted transition-colors">Home</a>
+        <a href="index.html#about" class="mobile-link hover:text-muted transition-colors">About Me</a>
+        <a href="index.html#resume" class="mobile-link hover:text-muted transition-colors">Experience</a>
+        <a href="index.html#services" class="mobile-link hover:text-muted transition-colors">Services</a>
+        <a href="works.html" class="mobile-link text-muted">Portfolio</a>
+        <a href="index.html#tools" class="mobile-link hover:text-muted transition-colors">Tools</a>
+        <a href="index.html#contact" class="mobile-link mt-4 text-base rule-link">Book A Call &#8599;</a>
     </div>
 
     <!-- Works Grid Section -->
-    <section class="min-h-screen pt-32 pb-24 w-full relative z-10 px-8 md:px-16 lg:px-24">
+    <section class="min-h-screen pt-36 md:pt-44 pb-24 w-full px-6 md:px-10 lg:px-14">
         <div class="w-full max-w-[1400px] mx-auto">
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-wide uppercase text-center observe-animate">
-                ALL <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-white">WORKS</span>
-            </h1>
-            <p class="text-[#d5d5d5] text-center max-w-3xl mx-auto mb-16 text-sm md:text-base observe-animate delay-100">
-                Explore a comprehensive collection of my projects ranging from graphic designs, user interfaces, to full-stack applications. Each project is crafted with care and purpose.
+
+            <div class="flex items-center gap-4 mb-6 observe-animate">
+                <span class="label text-muted">Portfolio</span>
+                <div class="h-px w-10 bg-line"></div>
+                <span class="label text-muted">2019 &ndash; 2026</span>
+            </div>
+
+            <h1 class="display text-6xl md:text-8xl lg:text-9xl mb-8 observe-animate">All works</h1>
+
+            <p class="text-muted text-[15px] md:text-base leading-relaxed font-light max-w-xl mb-16 observe-animate delay-100">
+                A comprehensive collection of my projects &mdash; from graphic design and brand identity to user
+                interfaces and full-stack applications. Each one is crafted with care and purpose.
             </p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14">
+
                 <!-- Work Item 1 -->
-                <div class="group relative bg-[#1a1a1a] rounded-2xl overflow-hidden observe-animate delay-200 aspect-[4/3] flex flex-col cursor-pointer work-item" data-samples='[{"src":"./itemOne/ticket-01.png","desc":"Front design of the sample ticket."},{"src":"./itemOne/ticket-02.png","desc":"Back design of the sample ticket."}]'>
-                    <div class="w-full flex-1 bg-[#2a2a2a] flex items-center justify-center group-hover:scale-105 transition-transform duration-500 text-gray-500">
-                        <img src="./itemOne/ticket-01.png" alt="Ticket Design" class="w-full h-full object-cover">
+                <div class="group cursor-pointer work-item observe-animate delay-200"
+                    data-samples='[{"src":"./itemOne/ticket-01.png","desc":"Front design of the sample ticket."},{"src":"./itemOne/ticket-02.png","desc":"Back design of the sample ticket."}]'>
+                    <div class="bg-chalk aspect-[4/3] overflow-hidden">
+                        <img src="./itemOne/ticket-01.png" alt="Ticket Design"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]">
                     </div>
-                    <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 class="text-white font-bold text-xl mb-1">Random Designs & </h3>
-                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Graphic Design & Branding</p>
+                    <div class="flex items-baseline justify-between gap-4 pt-5 border-t border-line mt-5">
+                        <div>
+                            <h3 class="text-lg font-medium tracking-tight">Random Designs</h3>
+                            <p class="text-muted text-[13px] mt-1">Graphic Design &amp; Branding</p>
+                        </div>
+                        <span class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            aria-hidden="true">&#8599;</span>
                     </div>
                 </div>
 
                 <!-- Work Item 2 -->
-                <div class="group relative bg-[#1a1a1a] rounded-2xl overflow-hidden observe-animate delay-300 aspect-[4/3] flex flex-col cursor-pointer work-item" data-samples='[{"src":"./itemTwo/Kaon-time.png","desc":"Kaon-Time brand logo and social media presentation."},{"src":"./itemTwo/kaon-time-starionary.png","desc":"Kaon-Time stationary, packaging, and branding assets."},{"src":"./itemTwo/Packaging.png","desc":"Kaon-Time packaging design."},{"src":"./itemTwo/iPone.png","desc":"Kaon-Time mobile app preview."}]'>
-                    <div class="w-full flex-1 bg-[#2a2a2a] flex items-center justify-center group-hover:scale-105 transition-transform duration-500 text-gray-500">
-                        <img src="./itemTwo/Kaon-time.png" alt="Kaon Time" class="w-full h-full object-cover">
+                <div class="group cursor-pointer work-item observe-animate delay-300"
+                    data-samples='[{"src":"./itemTwo/Kaon-time.png","desc":"Kaon-Time brand logo and social media presentation."},{"src":"./itemTwo/kaon-time-starionary.png","desc":"Kaon-Time stationary, packaging, and branding assets."},{"src":"./itemTwo/Packaging.png","desc":"Kaon-Time packaging design."},{"src":"./itemTwo/iPone.png","desc":"Kaon-Time mobile app preview."}]'>
+                    <div class="bg-chalk aspect-[4/3] overflow-hidden">
+                        <img src="./itemTwo/Kaon-time.png" alt="Kaon Time"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]">
                     </div>
-                    <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 class="text-white font-bold text-xl mb-1">Branding</h3>
-                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Logo & Brand Identity</p>
+                    <div class="flex items-baseline justify-between gap-4 pt-5 border-t border-line mt-5">
+                        <div>
+                            <h3 class="text-lg font-medium tracking-tight">Branding</h3>
+                            <p class="text-muted text-[13px] mt-1">Logo &amp; Brand Identity</p>
+                        </div>
+                        <span class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            aria-hidden="true">&#8599;</span>
                     </div>
                 </div>
 
                 <!-- Work Item 3 -->
-                <div class="group relative bg-[#1a1a1a] rounded-2xl overflow-hidden observe-animate delay-300 aspect-[4/3] flex flex-col cursor-pointer work-item" data-samples='[{"src":"./itemThree/bloodtrack.png","desc":"BloodTrack UI/UX Design for tracking blood donation requests."},{"src":"./itemThree/Reports.png","desc":"Reports UI/UX Design"}]'>
-                    <div class="w-full flex-1 bg-[#2a2a2a] flex items-center justify-center group-hover:scale-105 transition-transform duration-500 text-gray-500">
-                        <img src="./itemThree/bloodtrack.png" alt="BloodTrack" class="w-full h-full object-cover top-0">
+                <div class="group cursor-pointer work-item observe-animate delay-300"
+                    data-samples='[{"src":"./itemThree/bloodtrack.png","desc":"BloodTrack UI/UX Design for tracking blood donation requests."},{"src":"./itemThree/Reports.png","desc":"Reports UI/UX Design"}]'>
+                    <div class="bg-chalk aspect-[4/3] overflow-hidden">
+                        <img src="./itemThree/bloodtrack.png" alt="BloodTrack"
+                            class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]">
                     </div>
-                    <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 class="text-white font-bold text-xl mb-1">Website Design</h3>
-                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">UI/UX Design</p>
+                    <div class="flex items-baseline justify-between gap-4 pt-5 border-t border-line mt-5">
+                        <div>
+                            <h3 class="text-lg font-medium tracking-tight">Website Design</h3>
+                            <p class="text-muted text-[13px] mt-1">UI/UX Design</p>
+                        </div>
+                        <span class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            aria-hidden="true">&#8599;</span>
                     </div>
                 </div>
 
                 <!-- Work Item 4 -->
-                <div class="group relative bg-[#1a1a1a] rounded-2xl overflow-hidden observe-animate delay-100 aspect-[4/3] flex flex-col cursor-pointer work-item" data-samples='[{"src":"./Book/lightkeeper-front.jpg","desc":"Book cover front design."},{"src":"./Book/lightkeeper-front-2.jpg","desc":"Alternative book cover design concept."},{"src":"./Book/lightkeeper-front-3.jpg","desc":"3D mockup of the book cover."},{"src":"./Book/crimson-mockup.png","desc":"Crimson book cover mockup."},{"src":"./Book/crimson-mockup2.png","desc":"Crimson book cover mockup alternative view."}]'>
-                    <div class="w-full flex-1 bg-[#2a2a2a] flex items-center justify-center group-hover:scale-105 transition-transform duration-500 text-gray-500">
-                        <img src="./Book/lightkeeper-front.jpg" alt="Book Cover" class="w-full h-full object-cover">
+                <div class="group cursor-pointer work-item observe-animate delay-100"
+                    data-samples='[{"src":"./Book/lightkeeper-front.jpg","desc":"Book cover front design."},{"src":"./Book/lightkeeper-front-2.jpg","desc":"Alternative book cover design concept."},{"src":"./Book/lightkeeper-front-3.jpg","desc":"3D mockup of the book cover."},{"src":"./Book/crimson-mockup.png","desc":"Crimson book cover mockup."},{"src":"./Book/crimson-mockup2.png","desc":"Crimson book cover mockup alternative view."}]'>
+                    <div class="bg-chalk aspect-[4/3] overflow-hidden">
+                        <img src="./Book/lightkeeper-front.jpg" alt="Book Cover"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]">
                     </div>
-                    <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 class="text-white font-bold text-xl mb-1">Book Cover</h3>
-                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Graphic Design & Illustration</p>
-                    </div>
-                </div>
-
-                <!-- Work Item 5 -->
-                <div class="group relative bg-[#1a1a1a] rounded-2xl overflow-hidden observe-animate delay-200 aspect-[4/3] flex flex-col cursor-pointer work-item" data-samples='[]'>
-                    <div class="w-full flex-1 bg-[#2a2a2a] flex items-center justify-center group-hover:scale-105 transition-transform duration-500 text-gray-500">
-                        Image
-                    </div>
-                    <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 class="text-white font-bold text-xl mb-1">Coming Soon</h3>
-                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Branding Guidelines</p>
+                    <div class="flex items-baseline justify-between gap-4 pt-5 border-t border-line mt-5">
+                        <div>
+                            <h3 class="text-lg font-medium tracking-tight">Book Cover</h3>
+                            <p class="text-muted text-[13px] mt-1">Graphic Design &amp; Illustration</p>
+                        </div>
+                        <span class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            aria-hidden="true">&#8599;</span>
                     </div>
                 </div>
 
-                <!-- Work Item 6 -->
-                <div class="group relative bg-[#1a1a1a] rounded-2xl overflow-hidden observe-animate delay-300 aspect-[4/3] flex flex-col cursor-pointer work-item" data-samples='[]'>
-                    <div class="w-full flex-1 bg-[#2a2a2a] flex items-center justify-center group-hover:scale-105 transition-transform duration-500 text-gray-500">
-                        Image
+                <!-- Work Item 5 - placeholder -->
+                <div class="observe-animate delay-200">
+                    <div class="bg-chalk aspect-[4/3] flex items-center justify-center border border-dashed border-line">
+                        <span class="label text-muted">Coming soon</span>
                     </div>
-                    <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 class="text-white font-bold text-xl mb-1">Coming Soon</h3>
-                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Full-Stack Application</p>
+                    <div class="flex items-baseline justify-between gap-4 pt-5 border-t border-line mt-5">
+                        <div>
+                            <h3 class="text-lg font-medium tracking-tight text-muted">Coming Soon</h3>
+                            <p class="text-muted text-[13px] mt-1">Branding Guidelines</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Item 6 - placeholder -->
+                <div class="observe-animate delay-300">
+                    <div class="bg-chalk aspect-[4/3] flex items-center justify-center border border-dashed border-line">
+                        <span class="label text-muted">Coming soon</span>
+                    </div>
+                    <div class="flex items-baseline justify-between gap-4 pt-5 border-t border-line mt-5">
+                        <div>
+                            <h3 class="text-lg font-medium tracking-tight text-muted">Coming Soon</h3>
+                            <p class="text-muted text-[13px] mt-1">Full-Stack Application</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="mt-16 text-center observe-animate">
-                <a href="index.html" class="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-gray-600 rounded-full text-gray-300 hover:text-white hover:border-white transition-all duration-300 text-sm tracking-widest font-medium uppercase">
-                    <svg class="w-5 h-5 shrink-0 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+
+            <div class="mt-20 observe-animate">
+                <a href="index.html"
+                    class="inline-flex items-center gap-3 px-8 py-4 border border-ink rounded-full text-ink hover:bg-ink hover:text-paper transition-all duration-300 text-[13px] tracking-widest font-medium uppercase">
+                    <svg class="w-4 h-4 shrink-0 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                        </path>
+                    </svg>
                     Back to Portfolio
                 </a>
             </div>
@@ -166,32 +253,46 @@
     </section>
 
     <!-- Works Modal -->
-    <div id="works-modal" class="fixed inset-0 z-[60] hidden bg-black/95 flex-col items-center justify-center p-4 md:p-8 backdrop-blur-sm transition-opacity duration-300 opacity-0">
-        <button id="close-modal" class="absolute top-6 right-6 text-white hover:text-gray-300 z-10 p-2 bg-black/50 rounded-full" aria-label="Close modal">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <div id="works-modal"
+        class="fixed inset-0 z-[60] hidden bg-paper/98 backdrop-blur-sm flex-col items-center justify-center p-4 md:p-8 transition-opacity duration-300 opacity-0">
+        <button id="close-modal"
+            class="absolute top-6 right-6 text-ink hover:text-muted transition-colors z-10 p-2"
+            aria-label="Close modal">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
         </button>
-        
+
         <div class="max-w-6xl w-full max-h-full flex flex-col items-center relative gap-4">
             <div class="relative w-full h-[60vh] md:h-[75vh] flex items-center justify-center mb-4">
-                <img id="modal-image" src="" alt="Work Sample" class="max-w-full max-h-full object-contain shadow-2xl transition-all duration-300 rounded-lg">
-                
-                <button id="prev-slide" class="absolute left-0 md:-left-12 top-1/2 -translate-y-1/2 text-white/50 hover:text-white p-2 transition-colors bg-black/50 rounded-full" aria-label="Previous image">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                <img id="modal-image" src="" alt="Work Sample"
+                    class="max-w-full max-h-full object-contain transition-all duration-300">
+
+                <button id="prev-slide"
+                    class="absolute left-0 md:-left-14 top-1/2 -translate-y-1/2 text-muted hover:text-ink p-2 transition-colors"
+                    aria-label="Previous image">
+                    <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" d="M15 19l-7-7 7-7"></path>
+                    </svg>
                 </button>
-                <button id="next-slide" class="absolute right-0 md:-right-12 top-1/2 -translate-y-1/2 text-white/50 hover:text-white p-2 transition-colors bg-black/50 rounded-full" aria-label="Next image">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <button id="next-slide"
+                    class="absolute right-0 md:-right-14 top-1/2 -translate-y-1/2 text-muted hover:text-ink p-2 transition-colors"
+                    aria-label="Next image">
+                    <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" d="M9 5l7 7-7 7"></path>
+                    </svg>
                 </button>
             </div>
-            
+
             <div class="text-center max-w-2xl px-4 flex-shrink-0">
-                <p id="modal-description" class="text-gray-300 text-lg md:text-xl font-medium"></p>
-                <div id="slide-indicators" class="flex justify-center gap-2 mt-4"></div>
+                <p id="modal-description" class="text-muted text-sm md:text-base font-light"></p>
+                <div id="slide-indicators" class="flex justify-center gap-2 mt-5"></div>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="py-8 bg-[#0a0a0a] text-center text-slate-500 text-sm z-10 relative">
+    <footer class="py-8 border-t border-line text-center text-muted text-sm">
         <p>&copy; 2026 Ederio. All rights reserved.</p>
     </footer>
 
@@ -250,7 +351,7 @@
                 
                 // Update indicators
                 slideIndicators.innerHTML = currentSamples.map((_, i) => 
-                    `<button class="w-2.5 h-2.5 rounded-full transition-colors ${i === currentIndex ? 'bg-white' : 'bg-white/30'}" aria-label="Go to slide ${i + 1}"></button>`
+                    `<button class="w-2.5 h-2.5 rounded-full transition-colors ${i === currentIndex ? 'bg-ink' : 'bg-ink/25'}" aria-label="Go to slide ${i + 1}"></button>`
                 ).join('');
                 
                 // Add click events to indicators
@@ -334,4 +435,5 @@
     </script>
     <script src="javascript/main.js"></script>
 </body>
+
 </html>
