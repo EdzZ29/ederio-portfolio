@@ -163,8 +163,7 @@
 
     <!-- ===================== HERO ===================== -->
     <section id="home"
-        class="relative min-h-screen w-full overflow-hidden flex items-center pt-28 pb-20 lg:pt-24 lg:pb-16">
-
+        class="relative min-h-screen w-full overflow-hidden flex flex-col pt-28 pb-8 lg:pt-24 lg:pb-10">
 
         <!-- Left Rail: role label, hairline, year -->
         <div class="hidden lg:flex flex-col items-center absolute left-12 top-32 bottom-14 z-20 text-muted">
@@ -173,57 +172,77 @@
             <span class="vertical label">2026</span>
         </div>
 
-        <div class="w-full max-w-[1600px] mx-auto px-6 md:px-10 lg:pl-32 lg:pr-14 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-6 items-end">
+        <!-- Upper block: meta rule + headline -->
+        <div
+            class="w-full max-w-[1600px] mx-auto px-6 md:px-10 lg:pl-32 lg:pr-14 relative z-10 flex-1 flex flex-col justify-center">
 
-                <!-- Text Column -->
-                <div class="order-2 lg:order-1 observe-animate">
+            <!-- Meta Row -->
+            <div class="observe-animate flex items-center justify-between gap-6 border-b border-line pb-5">
+                <span class="label text-muted">Portfolio</span>
+                <span class="label text-muted inline-flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-ink" aria-hidden="true"></span>
+                    Available for work
+                </span>
+            </div>
 
-                    <!-- Stats Row -->
-                    <div class="flex items-stretch gap-8 md:gap-12 mb-10 md:mb-14">
-                        <div>
-                            <div class="flex items-start">
-                                <span class="text-xl md:text-2xl font-light leading-none mt-1.5">+</span>
-                                <span class="text-4xl md:text-5xl font-light leading-none tracking-tight">6</span>
-                            </div>
-                            <p class="text-muted text-[13px] mt-2">Years experience</p>
-                        </div>
+            <!-- Headline Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-20 items-end mt-12 md:mt-16">
 
-                        <div class="w-px bg-line"></div>
+                <!-- Oversized Greeting -->
+                <h1
+                    class="observe-animate display text-[5.5rem] sm:text-[8rem] md:text-[10rem] lg:text-[11rem] xl:text-[13rem]">
+                    Hello
+                </h1>
 
-                        <div>
-                            <div class="flex items-start">
-                                <span class="text-xl md:text-2xl font-light leading-none mt-1.5">+</span>
-                                <span class="text-4xl md:text-5xl font-light leading-none tracking-tight">3</span>
-                            </div>
-                            <p class="text-muted text-[13px] mt-2">Core disciplines</p>
-                        </div>
-                    </div>
-
-                    <!-- Oversized Greeting -->
-                    <h1 class="display text-[5.5rem] sm:text-[8rem] md:text-[10rem] lg:text-[11rem] xl:text-[13rem]">
-                        Hello
-                    </h1>
-
-                    <p class="text-muted text-base md:text-lg mt-5 md:mt-6 font-light">
-                        &mdash; It&rsquo;s Ederio, a designer who codes
+                <!-- Intro + CTA, hung off the opposite edge -->
+                <div class="observe-animate delay-200 lg:justify-self-end lg:text-right lg:max-w-sm lg:pb-6">
+                    <p class="text-muted text-base md:text-lg font-light leading-relaxed">
+                        &mdash; It&rsquo;s Edmundo, a designer who codes
                     </p>
+                    <a href="#works"
+                        class="inline-flex items-center gap-2 mt-6 text-base md:text-lg rule-link hover:text-muted transition-colors group">
+                        See selected work
+                        <span class="transition-transform duration-300 group-hover:translate-x-1"
+                            aria-hidden="true">&#8599;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-                    <!-- Scroll Cue -->
+        <!-- Lower block: stats ledger -->
+        <div class="w-full max-w-[1600px] mx-auto px-6 md:px-10 lg:pl-32 lg:pr-14 relative z-10 mt-12">
+            <div
+                class="observe-animate delay-300 border-t border-line pt-7 grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-8">
+
+                <div>
+                    <div class="flex items-start">
+                        <span class="text-xl md:text-2xl font-light leading-none mt-1.5">+</span>
+                        <span class="text-4xl md:text-5xl font-light leading-none tracking-tight">6</span>
+                    </div>
+                    <p class="label text-muted mt-3">Years experience</p>
+                </div>
+
+                <div>
+                    <div class="flex items-start">
+                        <span class="text-xl md:text-2xl font-light leading-none mt-1.5">+</span>
+                        <span class="text-4xl md:text-5xl font-light leading-none tracking-tight">3</span>
+                    </div>
+                    <p class="label text-muted mt-3">Core disciplines</p>
+                </div>
+
+                <div>
+                    <p class="text-2xl md:text-3xl font-light leading-none tracking-tight mt-2 md:mt-3">Butuan City</p>
+                    <p class="label text-muted mt-3">Based in PH</p>
+                </div>
+
+                <div class="flex md:justify-end items-end">
                     <a href="#about"
-                        class="hidden lg:inline-flex items-center gap-2 text-muted text-sm mt-20 hover:text-ink transition-colors group">
+                        class="inline-flex items-center gap-2 text-muted text-sm hover:text-ink transition-colors group">
                         Scroll down
                         <span class="transition-transform duration-300 group-hover:translate-y-1"
                             aria-hidden="true">&#8595;</span>
                     </a>
                 </div>
-
-                <!-- Portrait Column -->
-                <div class="order-1 lg:order-2 observe-animate delay-200 w-full lg:mr-[-3.5rem] lg:mb-[-4rem]">
-                    <img src="./formal-2x2.png" alt="Portrait of Edmundo C. Ederio Jr."
-                        class="portrait w-full h-[38vh] sm:h-[46vh] lg:h-[84vh] object-cover object-top" />
-                </div>
-
             </div>
         </div>
     </section>
@@ -274,7 +293,7 @@
                         </div>
                         <div>
                             <p class="label text-muted mb-2">Based in</p>
-                            <p class="text-sm">Butuan City, PH</p>
+                            <p class="text-sm">Butuan City, Philippines</p>
                         </div>
                     </div>
 
