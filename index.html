@@ -106,6 +106,117 @@
             text-underline-offset: 5px;
             text-decoration-thickness: 1px;
         }
+
+        /* Service rows: the description unfurls on hover / keyboard focus */
+        .service-row {
+            transition: padding 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .service-row:hover,
+        .service-row:focus-visible {
+            padding-left: 0.85rem;
+            padding-right: 0.85rem;
+        }
+
+        /* A hairline that draws itself in from the left under the hovered row */
+        .service-row::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            height: 1px;
+            width: 100%;
+            background: #111111;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .service-row:hover::after,
+        .service-row:focus-visible::after {
+            transform: scaleX(1);
+        }
+
+        /* 0fr -> 1fr gives a height transition without hard-coding a height */
+        .service-reveal {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            transition: grid-template-rows 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 0.35s ease;
+        }
+
+        .service-reveal > div {
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .service-reveal p {
+            transform: translateY(-8px);
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .service-row:hover .service-reveal,
+        .service-row:focus-visible .service-reveal {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+
+        .service-row:hover .service-reveal p,
+        .service-row:focus-visible .service-reveal p {
+            transform: translateY(0);
+        }
+
+        /* Title nudges forward, arrow flies out along its own diagonal */
+        .service-title {
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .service-row:hover .service-title,
+        .service-row:focus-visible .service-title {
+            transform: translateX(6px);
+        }
+
+        .service-arrow {
+            opacity: 0;
+            transform: translate(-6px, 6px);
+            transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .service-row:hover .service-arrow,
+        .service-row:focus-visible .service-arrow {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        /* No hover on touch - show every description outright */
+        @media (hover: none) {
+            .service-reveal {
+                grid-template-rows: 1fr;
+                opacity: 1;
+            }
+
+            .service-reveal p {
+                transform: none;
+            }
+
+            .service-arrow {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .service-row,
+            .service-row::after,
+            .service-reveal,
+            .service-reveal p,
+            .service-title,
+            .service-arrow {
+                transition-duration: 0.01ms;
+            }
+        }
+
     </style>
 </head>
 
@@ -544,57 +655,99 @@
                 <div class="observe-animate delay-200 border-t border-line">
 
                     <a href="#contact"
-                        class="group flex items-baseline gap-6 md:gap-10 py-7 border-b border-line hover:px-3 transition-all duration-300">
-                        <span class="label text-muted shrink-0">01</span>
-                        <span class="text-2xl md:text-3xl font-light tracking-tight flex-1">Graphic Design</span>
-                        <span
-                            class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
-                            aria-hidden="true">&#8599;</span>
+                        class="service-row group relative block py-7 border-b border-line">
+                        <div class="flex items-baseline gap-6 md:gap-10">
+                            <span class="label text-muted shrink-0">01</span>
+                            <span class="service-title text-2xl md:text-3xl font-light tracking-tight flex-1">Graphic Design</span>
+                            <span class="service-arrow text-muted shrink-0" aria-hidden="true">&#8599;</span>
+                        </div>
+                        <div class="service-reveal">
+                            <div>
+                                <p class="text-muted text-[15px] leading-relaxed font-light max-w-md pt-4 pl-[calc(1.5rem+2ch)] md:pl-[calc(2.5rem+2ch)]">
+                                    Logos, book covers, posters and brand collateral &mdash; built as a consistent system, not one-off files.
+                                </p>
+                            </div>
+                        </div>
                     </a>
 
                     <a href="#contact"
-                        class="group flex items-baseline gap-6 md:gap-10 py-7 border-b border-line hover:px-3 transition-all duration-300">
-                        <span class="label text-muted shrink-0">02</span>
-                        <span class="text-2xl md:text-3xl font-light tracking-tight flex-1">UX/UI Design</span>
-                        <span
-                            class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
-                            aria-hidden="true">&#8599;</span>
+                        class="service-row group relative block py-7 border-b border-line">
+                        <div class="flex items-baseline gap-6 md:gap-10">
+                            <span class="label text-muted shrink-0">02</span>
+                            <span class="service-title text-2xl md:text-3xl font-light tracking-tight flex-1">UX/UI Design</span>
+                            <span class="service-arrow text-muted shrink-0" aria-hidden="true">&#8599;</span>
+                        </div>
+                        <div class="service-reveal">
+                            <div>
+                                <p class="text-muted text-[15px] leading-relaxed font-light max-w-md pt-4 pl-[calc(1.5rem+2ch)] md:pl-[calc(2.5rem+2ch)]">
+                                    Wireframes, user flows and high-fidelity screens in Figma, handed over with the states and specs developers actually need.
+                                </p>
+                            </div>
+                        </div>
                     </a>
 
                     <a href="#contact"
-                        class="group flex items-baseline gap-6 md:gap-10 py-7 border-b border-line hover:px-3 transition-all duration-300">
-                        <span class="label text-muted shrink-0">03</span>
-                        <span class="text-2xl md:text-3xl font-light tracking-tight flex-1">Website Design</span>
-                        <span
-                            class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
-                            aria-hidden="true">&#8599;</span>
+                        class="service-row group relative block py-7 border-b border-line">
+                        <div class="flex items-baseline gap-6 md:gap-10">
+                            <span class="label text-muted shrink-0">03</span>
+                            <span class="service-title text-2xl md:text-3xl font-light tracking-tight flex-1">Website Design</span>
+                            <span class="service-arrow text-muted shrink-0" aria-hidden="true">&#8599;</span>
+                        </div>
+                        <div class="service-reveal">
+                            <div>
+                                <p class="text-muted text-[15px] leading-relaxed font-light max-w-md pt-4 pl-[calc(1.5rem+2ch)] md:pl-[calc(2.5rem+2ch)]">
+                                    Responsive layouts with clear typography and pacing, designed to hold up from a phone screen to a wide display.
+                                </p>
+                            </div>
+                        </div>
                     </a>
 
                     <a href="#contact"
-                        class="group flex items-baseline gap-6 md:gap-10 py-7 border-b border-line hover:px-3 transition-all duration-300">
-                        <span class="label text-muted shrink-0">04</span>
-                        <span class="text-2xl md:text-3xl font-light tracking-tight flex-1">Website Development</span>
-                        <span
-                            class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
-                            aria-hidden="true">&#8599;</span>
+                        class="service-row group relative block py-7 border-b border-line">
+                        <div class="flex items-baseline gap-6 md:gap-10">
+                            <span class="label text-muted shrink-0">04</span>
+                            <span class="service-title text-2xl md:text-3xl font-light tracking-tight flex-1">Website Development</span>
+                            <span class="service-arrow text-muted shrink-0" aria-hidden="true">&#8599;</span>
+                        </div>
+                        <div class="service-reveal">
+                            <div>
+                                <p class="text-muted text-[15px] leading-relaxed font-light max-w-md pt-4 pl-[calc(1.5rem+2ch)] md:pl-[calc(2.5rem+2ch)]">
+                                    Clean, hand-written front-ends &mdash; HTML, CSS, JavaScript and Tailwind &mdash; that stay fast, accessible and easy to maintain.
+                                </p>
+                            </div>
+                        </div>
                     </a>
 
                     <a href="#contact"
-                        class="group flex items-baseline gap-6 md:gap-10 py-7 border-b border-line hover:px-3 transition-all duration-300">
-                        <span class="label text-muted shrink-0">05</span>
-                        <span class="text-2xl md:text-3xl font-light tracking-tight flex-1">Basic Video Editing</span>
-                        <span
-                            class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
-                            aria-hidden="true">&#8599;</span>
+                        class="service-row group relative block py-7 border-b border-line">
+                        <div class="flex items-baseline gap-6 md:gap-10">
+                            <span class="label text-muted shrink-0">05</span>
+                            <span class="service-title text-2xl md:text-3xl font-light tracking-tight flex-1">Basic Video Editing</span>
+                            <span class="service-arrow text-muted shrink-0" aria-hidden="true">&#8599;</span>
+                        </div>
+                        <div class="service-reveal">
+                            <div>
+                                <p class="text-muted text-[15px] leading-relaxed font-light max-w-md pt-4 pl-[calc(1.5rem+2ch)] md:pl-[calc(2.5rem+2ch)]">
+                                    Short-form cuts for social and promos: trimming, captions, simple motion graphics and colour clean-up.
+                                </p>
+                            </div>
+                        </div>
                     </a>
 
                     <a href="#contact"
-                        class="group flex items-baseline gap-6 md:gap-10 py-7 border-b border-line hover:px-3 transition-all duration-300">
-                        <span class="label text-muted shrink-0">06</span>
-                        <span class="text-2xl md:text-3xl font-light tracking-tight flex-1">App Development</span>
-                        <span
-                            class="text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
-                            aria-hidden="true">&#8599;</span>
+                        class="service-row group relative block py-7 border-b border-line">
+                        <div class="flex items-baseline gap-6 md:gap-10">
+                            <span class="label text-muted shrink-0">06</span>
+                            <span class="service-title text-2xl md:text-3xl font-light tracking-tight flex-1">App Development</span>
+                            <span class="service-arrow text-muted shrink-0" aria-hidden="true">&#8599;</span>
+                        </div>
+                        <div class="service-reveal">
+                            <div>
+                                <p class="text-muted text-[15px] leading-relaxed font-light max-w-md pt-4 pl-[calc(1.5rem+2ch)] md:pl-[calc(2.5rem+2ch)]">
+                                    Mobile and desktop applications taken from concept through to a working, tested build.
+                                </p>
+                            </div>
+                        </div>
                     </a>
 
                 </div>
